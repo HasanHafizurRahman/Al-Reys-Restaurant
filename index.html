@@ -144,15 +144,70 @@
         }
 
         /* header */
-        header {
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+        .nav-item {
+            position: relative;
+            padding: 8px 6px;
+            color: #0f1724;
+            /* neutral dark */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            transition: color .18s ease;
         }
 
+        .nav-item::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -8px;
+            height: 6px;
+            width: 0;
+            border-radius: 999px;
+            background: var(--primary);
+            transition: width .22s cubic-bezier(.2, .9, .2, 1), opacity .22s;
+            opacity: 0;
+        }
+
+        /* hover shows a short underline */
+        .nav-item:hover::after,
+        .nav-item:focus::after {
+            width: 40px;
+            opacity: 1;
+        }
+
+        /* the 'pill' (Contact) — slightly bigger and visible as active */
+        .nav-pill {
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 999px;
+        }
+
+        .nav-pill::after {
+            /* wider, visible underline for the "Contact" pill */
+            bottom: -10px;
+            height: 6px;
+            width: 0;
+        }
+
+        /* active state (applied by JS below) */
+        .nav-item.active::after {
+            width: 56px;
+            opacity: 1;
+        }
+
+        /* support for keyboard focus styling */
         .nav-focus:focus {
-            outline: 3px solid rgba(206, 176, 46, 0.18);
-            outline-offset: 3px;
-            border-radius: .375rem;
+            outline: 3px solid rgba(206, 176, 46, 0.12);
+            outline-offset: 4px;
+            border-radius: .5rem;
+        }
+
+        /* small placement fix for mobile absolute menu */
+        #mobileNav {
+            z-index: 60;
+            left: 1rem;
+            right: 1rem;
         }
 
         /* testimonial slider small tweaks */
@@ -236,13 +291,41 @@
                 top: 10%;
             }
         }
+
+        /* Mobile modal close icon styles */
+        .modal-close-mobile {
+            display: none;
+        }
+
+        @media (max-width: 767px) {
+            .modal-close-mobile {
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                border-radius: 9999px;
+                background: rgba(255,255,255,0.95);
+                border: 1px solid rgba(0,0,0,0.06);
+                display: grid;
+                place-items: center;
+                box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+                z-index: 60;
+            }
+
+            /* ensure dialog has a little padding-top so the button doesn't overlap text */
+            [role="dialog"] {
+                padding-top: 48px;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-white text-neutral-700 font-pop antialiased">
 
     <!-- TOP BAR -->
-    <div class="bg-[rgba(21,21,21,0.02)] border-b">
+    <div class="hidden md:block bg-[rgba(21,21,21,0.02)] border-b">
         <div class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between text-xs text-neutral-500">
             <div>Open daily • Parking available • Halal Certified</div>
             <div class="flex items-center gap-4">
@@ -253,58 +336,50 @@
     </div>
 
     <!-- NAV -->
-    <header class="w-full sticky top-0 z-40 bg-white/60 border-b">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <a href="#home" class="flex items-center gap-3" aria-label="Al Reys Home">
+    <header class="w-full sticky top-6 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- rounded white bar -->
+            <div class="bg-white rounded-2xl shadow-soft-lg border border-white/60 flex items-center justify-between gap-6 py-3 px-5 md:px-6"
+                role="navigation" aria-label="Main navigation">
+
+                <!-- left: logo -->
+                <a href="#home" class="flex items-center gap-3">
                     <img src="/assets/logo.png" alt="Al Reys logo" class="h-10" />
-                    <span class="text-sm font-medium hidden sm:block">Al Reys</span>
+                    <span class="text-sm font-medium hidden sm:inline">Al Reys</span>
                 </a>
-            </div>
 
-            <nav id="main-nav" class="hidden md:flex items-center gap-6 text-sm" aria-label="Main navigation">
-                <a class="hover:text-primary nav-focus" href="#home">Home</a>
-                <a class="hover:text-primary nav-focus" href="#about">About</a>
-                <a class="hover:text-primary nav-focus" href="#menu">Our Menu</a>
-                <a class="hover:text-primary nav-focus" href="#testimonials">Testimonials</a>
-                <!-- contact anchor will scroll to footer -->
-                <a class="hover:text-primary nav-focus" href="#contact">Contact</a>
-            </nav>
+                <!-- center / right: links (desktop) -->
+                <!-- ADJUSTMENT: add ml-auto so nav sits to the right on desktop -->
+                <nav id="main-nav" class="hidden md:flex items-center gap-8 text-sm ml-auto">
+                    <a href="#home" class="nav-item nav-focus" data-target="#home">Home</a>
+                    <a href="#about" class="nav-item nav-focus" data-target="#about">About</a>
+                    <a href="#menu" class="nav-item nav-focus" data-target="#menu">Menu</a>
+                    <a href="#gallery" class="nav-item nav-focus" data-target="#gallery">Gallery</a>
+                    <a href="#contact" class="nav-item nav-focus nav-pill" data-target="#contact">Contact</a>
+                </nav>
 
-            <div class="flex items-center gap-3">
-                <button id="bookBtn"
-                    class="hidden md:inline-flex items-center gap-2 bg-primary text-secondary px-5 py-2 rounded shadow-sm font-semibold hover:scale-[1.02] transition focus:outline-none"
-                    aria-haspopup="dialog">
-                    <!-- phone icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M2 3h20v4H2zM3 8h18l-1 11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2L3 8z" />
-                    </svg>
-                    Book a Table
-                </button>
+                <!-- mobile controls -->
+                <div class="flex items-center gap-3">
+                    <button id="navToggle" aria-expanded="false" aria-controls="mobileNav"
+                        class="md:hidden p-2 rounded-md border nav-focus" aria-label="Open menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="hamburger" class="h-5 w-5 transition-transform"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
 
-                <button id="navToggle" aria-expanded="false" aria-controls="mobileNav"
-                    class="md:hidden p-2 rounded-md border nav-focus" aria-label="Open menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" id="hamburger" class="h-5 w-5 transition-transform"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile nav -->
-        <div id="mobileNav" class="md:hidden hidden border-t">
-            <div class="px-6 py-3 flex flex-col gap-2">
-                <a href="#home" class="py-2">Home</a>
-                <a href="#about" class="py-2">About</a>
-                <a href="#menu" class="py-2">Our Menu</a>
-                <a href="#testimonials" class="py-2">Testimonials</a>
-                <a href="#contact" class="py-2">Contact</a>
-                <button id="mobileBookBtn" class="mt-2 bg-primary text-secondary px-4 py-2 rounded">Book a
-                    Table</button>
+                <!-- mobile menu (keeps your previous mobile markup logic) -->
+                <div id="mobileNav" class="md:hidden hidden absolute left-0 right-0 mt-4 px-6">
+                    <div class="bg-white rounded-xl border shadow p-4 flex flex-col gap-2">
+                        <a href="#home" class="py-2">Home</a>
+                        <a href="#about" class="py-2">About</a>
+                        <a href="#menu" class="py-2">Menu</a>
+                        <a href="#gallery" class="py-2">Gallery</a>
+                        <a href="#contact" class="py-2">Contact</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -795,7 +870,16 @@
     <!-- Reservation Modal (simple accessible) -->
     <div id="modalBackdrop" class="fixed inset-0 hidden items-center justify-center modal-backdrop z-50">
         <div role="dialog" aria-modal="true" aria-labelledby="reserveTitle"
-            class="bg-white rounded-lg max-w-md w-full mx-4 p-6 shadow-soft-lg">
+            class="bg-white rounded-lg max-w-md w-full mx-4 p-6 shadow-soft-lg relative">
+            <!-- MOBILE CLOSE ICON (visible on small screens) -->
+            <button id="closeModalMobile" class="modal-close-mobile" aria-label="Close reservation (mobile)">
+                <!-- simple X icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
             <div class="flex items-start justify-between gap-4">
                 <div>
                     <h3 id="reserveTitle" class="text-lg font-medium">Reserve a Table</h3>
@@ -838,20 +922,41 @@
     </div>
 
     <script>
-        // Mobile nav toggle
         const navToggle = document.getElementById('navToggle');
         const mobileNav = document.getElementById('mobileNav');
         navToggle?.addEventListener('click', () => {
-            const open = mobileNav.classList.toggle('hidden');
-            navToggle.setAttribute('aria-expanded', String(!open));
-            // rotate hamburger for simple animation
+            const isHidden = mobileNav.classList.toggle('hidden');
+            navToggle.setAttribute('aria-expanded', String(!isHidden));
             document.getElementById('hamburger')?.classList.toggle('rotate-90');
         });
+
+        // set active nav item based on location.hash (or default to #home)
+        (function setupNavActive() {
+            const items = document.querySelectorAll('.nav-item');
+            function setActive(hash) {
+                items.forEach(i => i.classList.remove('active'));
+                if (!hash) hash = '#home';
+                const match = Array.from(items).find(a => a.dataset.target === hash);
+                if (match) match.classList.add('active');
+            }
+            // initial
+            setActive(location.hash || '#home');
+
+            // change on hash change
+            window.addEventListener('hashchange', () => setActive(location.hash));
+
+            // allow clicking items to set active immediately (works when links don't change hash)
+            items.forEach(a => a.addEventListener('click', (e) => {
+                // small delay so URL hash change (if any) happens first
+                setTimeout(() => setActive(location.hash || a.dataset.target), 30);
+            }));
+        })();
 
         // Reservation modal logic
         const modalBackdrop = document.getElementById('modalBackdrop');
         const openButtons = [document.getElementById('bookBtn'), document.getElementById('heroBook'), document.getElementById('mobileBookBtn')];
         const closeModal = document.getElementById('closeModal');
+        const closeModalMobile = document.getElementById('closeModalMobile'); // new mobile close button
         const cancelModal = document.getElementById('cancelModal');
         const reserveForm = document.getElementById('reserveForm');
 
@@ -871,6 +976,7 @@
 
         openButtons.forEach(btn => { if (btn) btn.addEventListener('click', openModal); });
         closeModal?.addEventListener('click', hideModal);
+        closeModalMobile?.addEventListener('click', hideModal); // hook mobile close to same handler
         cancelModal?.addEventListener('click', hideModal);
         modalBackdrop?.addEventListener('click', (e) => { if (e.target === modalBackdrop) hideModal(); });
 
