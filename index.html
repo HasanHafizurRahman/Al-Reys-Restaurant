@@ -158,10 +158,34 @@
         /* testimonial slider small tweaks */
         .slide {
             display: none;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .45s ease, transform .45s ease;
         }
 
         .slide.active {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* pagination dots */
+        .testi-dots {
+            display: inline-flex;
+            gap: 8px;
+        }
+
+        .testi-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+        }
+
+        .testi-dot.active {
+            background: var(--primary);
         }
 
         /* reservation modal */
@@ -300,17 +324,6 @@
                     Fresh ingredients, family recipes, and a welcoming atmosphere.</p>
 
                 <div class="mt-6 flex flex-wrap gap-3">
-                    <button id="heroBook"
-                        class="inline-flex items-center gap-3 bg-primary text-secondary px-6 py-3 rounded shadow font-semibold hover:scale-[1.02] transition"
-                        aria-haspopup="dialog">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M2 3h20v4H2zM3 8h18l-1 11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2L3 8z" />
-                        </svg>
-                        Reserve
-                    </button>
-
                     <a class="inline-flex items-center gap-2 border border-neutral-200 text-white/90 px-5 py-3 rounded hover:bg-white/5 transition"
                         href="#menu">View Menu</a>
                 </div>
@@ -319,7 +332,7 @@
                     <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M3 7h18M6 7v10a3 3 0 003 3h6a3 3 0 003-3V7" />
+                                d="M3 7h18M6 7v10a3 3 0 003 3h6a3 3 0 01-2-2V7" />
                         </svg> Parking available</div>
                     <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -597,7 +610,7 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS (slider) — now uses the standard section background for visual consistency -->
+    <!-- TESTIMONIALS (improved) -->
     <section id="testimonials" class="testi-section py-16">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center md:text-left mb-8">
@@ -608,9 +621,12 @@
                     atmosphere that bring people back.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative">
+            <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative" role="region"
+                aria-roledescription="carousel" aria-label="Customer testimonials">
+                <!-- Left: dynamic avatar + decorative bubble -->
                 <div class="flex flex-col items-center md:items-start justify-center space-y-6">
-                    <img src="/assets/avatar1.jpg" alt="Customer avatar" class="testi-avatar" />
+                    <img id="dynamicAvatar" src="/assets/avatar1.jpg" alt="Avatar for the current testimonial"
+                        class="testi-avatar" />
                     <div class="hidden md:block dots w-24 h-6 opacity-20"></div>
                     <div class="testi-quote-bubble" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 24 24">
@@ -621,6 +637,7 @@
                     </div>
                 </div>
 
+                <!-- Right: slides + controls -->
                 <div class="relative">
                     <div class="testi-big-quote" aria-hidden="true">
                         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
@@ -638,14 +655,13 @@
                         </svg>
                     </div>
 
-                    <!-- slider container -->
-                    <div id="testimonialSlider" class="max-w-xl relative">
-                        <div class="slide active">
-                            <p class="text-neutral-700 text-base md:text-lg leading-relaxed">The food was absolutely
-                                delicious, big chunks of meat, chicken, and lamb, and with some rice. It was so
-                                beautiful. It’s Somalian food, very authentic, so it’ll be proper like a home style, so
-                                you’ll be going into someone’s house and having that sort of food, so let’s go and check
-                                it out.</p>
+                    <!-- slider container (slides have data-avatar for dynamic avatar update) -->
+                    <div id="testimonialSlider" class="max-w-xl relative" aria-live="polite">
+                        <div class="slide active" data-avatar="/assets/avatar1.jpg" data-author="Latifs Inspired">
+                            <p class="text-neutral-700 text-base md:text-lg leading-relaxed">"The food was absolutely
+                                delicious — big generous cuts of meat, fragrant rice and the lamb shank was incredible.
+                                Felt
+                                like home cooking from the first bite. Highly recommended!"</p>
                             <div class="mt-8 flex items-center gap-4">
                                 <div class="w-10 h-10 rounded-full grid place-items-center"
                                     style="background:var(--testi-teal);">
@@ -662,11 +678,10 @@
                             </div>
                         </div>
 
-                        <!-- Add more slides if needed -->
-                        <div class="slide">
-                            <p class="text-neutral-700 text-base md:text-lg leading-relaxed">Amazing service — the staff
-                                were welcoming and the portions were generous. We will definitely return for the lamb
-                                shank!</p>
+                        <div class="slide" data-avatar="/assets/avatar2.jpg" data-author="Sofia Ahmed">
+                            <p class="text-neutral-700 text-base md:text-lg leading-relaxed">"Amazing service — the
+                                staff were warm and welcoming, and the portions were generous. We absolutely loved the
+                                flavourful spices. We'll be coming back for the lamb shank!"</p>
                             <div class="mt-8 flex items-center gap-4">
                                 <div class="w-10 h-10 rounded-full grid place-items-center"
                                     style="background:var(--testi-teal);">
@@ -683,17 +698,67 @@
                             </div>
                         </div>
 
+                        <div class="slide" data-avatar="/assets/avatar3.jpg" data-author="Omar Hassan">
+                            <p class="text-neutral-700 text-base md:text-lg leading-relaxed">"Perfect spot for family
+                                dinners. The kids loved the milder dishes, and the adults enjoyed the bold, authentic
+                                flavours. Friendly staff and tidy restaurant."</p>
+                            <div class="mt-8 flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full grid place-items-center"
+                                    style="background:var(--testi-teal);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M12 12a4 4 0 10-0-8 4 4 0 000 8zM4 20a8 8 0 0116 0" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-neutral-800">Omar Hassan</div>
+                                    <div class="text-xs text-neutral-400">Customer</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slide" data-avatar="/assets/avatar4.jpg" data-author="Aisha Noor">
+                            <p class="text-neutral-700 text-base md:text-lg leading-relaxed">"Beautiful ambience and
+                                authentic food. The staff took great care of dietary requirements and even suggested
+                                dishes that matched our tastes. We'll recommend Al Reys to friends."</p>
+                            <div class="mt-8 flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full grid place-items-center"
+                                    style="background:var(--testi-teal);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M12 12a4 4 0 10-0-8 4 4 0 000 8zM4 20a8 8 0 0116 0" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-neutral-800">Aisha Noor</div>
+                                    <div class="text-xs text-neutral-400">Customer</div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- slider controls -->
                         <div class="mt-6 flex items-center gap-3">
                             <button id="prevTesti" class="px-3 py-2 rounded bg-white border shadow-sm nav-focus"
                                 aria-label="Previous testimonial">&larr;</button>
                             <button id="nextTesti" class="px-3 py-2 rounded bg-white border shadow-sm nav-focus"
                                 aria-label="Next testimonial">&rarr;</button>
+
+                            <!-- dots (will be populated by JS) -->
+                            <div class="ml-4 testi-dots" id="testiDots" aria-hidden="false" role="tablist"
+                                aria-label="Testimonial pages">
+                                <!-- JS will insert dots here -->
+                            </div>
+
                             <div class="ml-auto text-xs text-neutral-400">Read more on our socials</div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- hidden live region used for screen readers to announce slide changes -->
+            <div id="testiLive" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
         </div>
     </section>
 
@@ -817,26 +882,94 @@
             reserveForm.reset();
         });
 
-        // Testimonial slider (simple)
+        // Testimonial slider (improved: dynamic avatar, dots, keyboard support, pause on hover)
         (function () {
-            const slides = Array.from(document.querySelectorAll('#testimonialSlider .slide'));
+            const slider = document.getElementById('testimonialSlider');
+            const slides = Array.from(slider.querySelectorAll('.slide'));
             const prevBtn = document.getElementById('prevTesti');
             const nextBtn = document.getElementById('nextTesti');
+            const avatarImg = document.getElementById('dynamicAvatar');
+            const dotsContainer = document.getElementById('testiDots');
+            const liveRegion = document.getElementById('testiLive');
+
             let idx = 0;
             let timer = null;
+            const interval = 6000;
+            let paused = false;
 
-            function show(i) {
-                slides.forEach((s, j) => s.classList.toggle('active', j === i));
+            function show(i, fromUser = false) {
+                if (i < 0) i = slides.length - 1;
+                if (i >= slides.length) i = 0;
+                idx = i;
+                slides.forEach((s, j) => {
+                    s.classList.toggle('active', j === i);
+                    const tab = dotsContainer.children[j];
+                    if (tab) {
+                        tab.classList.toggle('active', j === i);
+                        tab.setAttribute('aria-selected', String(j === i));
+                        tab.setAttribute('tabindex', j === i ? '0' : '-1');
+                    }
+                });
+
+                // Update avatar from data-avatar attr
+                const avatar = slides[i].dataset.avatar || '/assets/avatar1.jpg';
+                const author = slides[i].dataset.author || '';
+                avatarImg.src = avatar;
+                avatarImg.alt = author ? `Avatar of ${author}` : 'Customer avatar';
+
+                // Announce for screen readers
+                const text = slides[i].querySelector('p')?.textContent?.trim() || '';
+                liveRegion.textContent = `Testimonial ${i + 1} of ${slides.length}. ${author}. ${text}`;
+
+                // If this change was user-initiated, reset auto-rotate
+                if (fromUser) resetAuto();
             }
 
-            function next() { idx = (idx + 1) % slides.length; show(idx); }
-            function prev() { idx = (idx - 1 + slides.length) % slides.length; show(idx); }
+            function next(fromUser = false) { show((idx + 1) % slides.length, fromUser); }
+            function prev(fromUser = false) { show((idx - 1 + slides.length) % slides.length, fromUser); }
 
-            nextBtn?.addEventListener('click', () => { next(); resetAuto(); });
-            prevBtn?.addEventListener('click', () => { prev(); resetAuto(); });
+            // create dots
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'testi-dot nav-focus';
+                dot.setAttribute('role', 'tab');
+                dot.setAttribute('aria-label', `Show testimonial ${i + 1}`);
+                dot.setAttribute('aria-selected', 'false');
+                dot.setAttribute('tabindex', '-1');
+                dot.addEventListener('click', () => show(i, true));
+                dot.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        show(i, true);
+                    }
+                });
+                dotsContainer.appendChild(dot);
+            });
 
-            function startAuto() { timer = setInterval(next, 6000); }
+            function startAuto() { timer = setInterval(() => { if (!paused) next(); }, interval); }
             function resetAuto() { clearInterval(timer); startAuto(); }
+
+            // pause on hover / focus for accessibility
+            slider.addEventListener('mouseenter', () => paused = true);
+            slider.addEventListener('mouseleave', () => paused = false);
+            slider.addEventListener('focusin', () => paused = true);
+            slider.addEventListener('focusout', () => paused = false);
+
+            nextBtn?.addEventListener('click', () => next(true));
+            prevBtn?.addEventListener('click', () => prev(true));
+
+            // keyboard support (left/right)
+            document.addEventListener('keydown', (e) => {
+                // allow arrows only when focus is inside testimonial region OR if user explicitly wants keyboard control
+                const activeEl = document.activeElement;
+                const testiRegion = document.getElementById('testimonials');
+                const insideTesti = testiRegion && (testiRegion.contains(activeEl) || activeEl === document.body);
+                if (e.key === 'ArrowRight') { next(true); }
+                if (e.key === 'ArrowLeft') { prev(true); }
+            });
+
+            // make slides focusable for screen readers / keyboard
+            slides.forEach(s => s.setAttribute('tabindex', '0'));
 
             if (slides.length > 0) {
                 show(0);
