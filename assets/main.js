@@ -170,3 +170,45 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
         }
     });
 });
+
+// Stats strip — count-up + reveal when visible
+(function () {
+  const statSection = document.getElementById('highlights-stats');
+  if (!statSection) return;
+
+  const statEls = Array.from(statSection.querySelectorAll('.stat-number'));
+  const duration = 1400; // ms
+
+  function animateCount(el, target) {
+    const start = 0;
+    const end = Number(target);
+    if (isNaN(end)) return;
+    const startTime = performance.now();
+
+    function step(now) {
+      const t = Math.min((now - startTime) / duration, 1);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - t, 3);
+      const current = Math.floor(start + (end - start) * eased);
+      el.textContent = String(current);
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = String(end);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        statSection.querySelectorAll('.stat-card').forEach(c => c.classList.add('revealed'));
+        statEls.forEach(el => {
+          const target = el.dataset.target || el.textContent || '0';
+          animateCount(el, target);
+        });
+        observer.disconnect(); // run once
+      }
+    });
+  }, { threshold: 0.25 });
+
+  obs.observe(statSection);
+})();

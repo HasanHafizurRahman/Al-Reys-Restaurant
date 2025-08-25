@@ -292,6 +292,74 @@
             }
         }
 
+        /* Stats strip custom styles */
+        .stat-card {
+            background: transparent;
+            /* parent is white card already */
+        }
+
+        .stat-number {
+            position: absolute;
+            font-family: 'Lemon Milk', Poppins, sans-serif;
+            font-weight: 700;
+            font-size: 7.5rem;
+            /* large outlined number */
+            line-height: 0.85;
+            -webkit-text-stroke: 3px #d84b2f;
+            /* red outline like your testimonial accent */
+            color: transparent;
+            opacity: 0.10;
+            pointer-events: none;
+            user-select: none;
+            transform: translateY(-8%);
+            transition: transform .45s cubic-bezier(.2, .9, .2, 1), opacity .45s;
+            text-align: center;
+        }
+
+        /* Pill label (keeps readable, sits above number) */
+        .stat-pill {
+            position: relative;
+            z-index: 2;
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+            padding-top: .45rem;
+            padding-bottom: .45rem;
+            box-shadow: 0 8px 20px rgba(10, 10, 10, 0.06);
+        }
+
+        /* reveal animation when visible */
+        .stat-card.revealed .stat-number {
+            opacity: 0.12;
+            transform: translateY(-12%);
+        }
+
+        /* hover micro-lift */
+        .stat-card:hover .stat-pill,
+        .stat-card:focus-within .stat-pill {
+            transform: translateY(-6px);
+            transition: transform .22s ease;
+        }
+
+        /* responsive sizing */
+        @media (max-width: 1024px) {
+            .stat-number {
+                font-size: 5.5rem;
+                -webkit-text-stroke: 2.5px #d84b2f;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .stat-number {
+                font-size: 4rem;
+                -webkit-text-stroke: 2px #d84b2f;
+            }
+
+            .stat-pill {
+                padding-left: .9rem;
+                padding-right: .9rem;
+            }
+        }
+
         /* Mobile modal close icon styles */
         .modal-close-mobile {
             display: none;
@@ -836,6 +904,45 @@
             <div id="testiLive" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
         </div>
     </section>
+
+    <!-- STATS STRIP -->
+    <section id="highlights-stats" class="max-w-7xl mx-auto px-6 py-12">
+        <div class="bg-white rounded-2xl shadow-soft-lg border border-white/60 p-8">
+            <div class="text-center mb-10">
+                <h3 class="text-sm text-primary font-semibold tracking-widest">OUR IMPACT</h3>
+                <h2 class="mt-2 text-2xl md:text-3xl font-rock">Numbers that tell our story</h2>
+                <p class="mt-2 text-sm text-neutral-500 max-w-2xl mx-auto">From signature dishes to happy customers — a
+                    quick snapshot.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 items-center">
+                <!-- Dishes -->
+                <div class="relative stat-card overflow-visible rounded-lg p-6 flex items-center justify-center">
+                    <div class="stat-number" data-target="67" aria-hidden="true">9</div>
+                    <div class="stat-pill px-6 py-2 bg-white rounded shadow-sm font-semibold">Dishes</div>
+                </div>
+
+                <!-- Spices (house blend) -->
+                <div class="relative stat-card overflow-visible rounded-lg p-6 flex items-center justify-center">
+                    <div class="stat-number" data-target="1" aria-hidden="true">3</div>
+                    <div class="stat-pill px-6 py-2 bg-white rounded shadow-sm font-semibold">Platters</div>
+                </div>
+
+                <!-- Desserts -->
+                <div class="relative stat-card overflow-visible rounded-lg p-6 flex items-center justify-center">
+                    <div class="stat-number" data-target="3" aria-hidden="true">3</div>
+                    <div class="stat-pill px-6 py-2 bg-white rounded shadow-sm font-semibold">Desserts</div>
+                </div>
+
+                <!-- Drinks -->
+                <div class="relative stat-card overflow-visible rounded-lg p-6 flex items-center justify-center">
+                    <div class="stat-number" data-target="31" aria-hidden="true">17</div>
+                    <div class="stat-pill px-6 py-2 bg-white rounded shadow-sm font-semibold">Drinks</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- FOOTER (now contains contact info and uses secondary color background) -->
     <footer id="contact" class="py-10" style="background:var(--secondary); color: white;">
