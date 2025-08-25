@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Al Reys — Somali & Halal Cuisine</title>
+
+  <!-- Tailwind CDN (fast prototyping). For production, compile Tailwind instead. -->
+  <script>
+    tailwind = { config: { theme: { extend: {
+      colors: { primary: '#CEB02E', secondary: '#151515' },
+      fontFamily: {
+        lemon: ['"Lemon Milk"', 'sans-serif'],
+        rockwell: ['"Rockwell"', 'serif'],
+        poppins: ['Poppins', 'sans-serif']
+      }
+    } } } }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Poppins from Google for fallback / primary UI font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* IMPORTANT: If you have Lemon Milk and Rockwell font files, put them in /assets/fonts and update the src paths below */
+    @font-face { font-family: 'Lemon Milk'; src: url('/assets/fonts/LemonMilk-Regular.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Rockwell'; src: url('/assets/fonts/Rockwell-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+
+    :root{
+      --primary: #CEB02E;
+      --secondary: #151515;
+    }
+
+    /* small helpers to match the reference look */
+    .hero-bg { background-position: center; background-size: cover; }
+    .glass-card { background: rgba(255,255,255,0.98); box-shadow: 0 18px 40px rgba(20,20,30,0.08); }
+    .c-quote { color: var(--primary); }
+
+    /* subtle dot pattern similar to reference */
+    .dots { background-image: radial-gradient(currentColor 1px, transparent 1px); background-size: 10px 10px; opacity: .08 }
+
+    /* force chosen fonts via tailwind utility fallbacks */
+    .font-lemon { font-family: 'Lemon Milk', Poppins, sans-serif; }
+    .font-rock { font-family: 'Rockwell', 'Times New Roman', serif; }
+    .font-pop { font-family: Poppins, sans-serif; }
+
+    /* responsive hero text scale */
+    .hero-title { text-shadow: 0 6px 18px rgba(0,0,0,0.45); }
+
+    /* testimonial avatar ring */
+    .avatar-ring { box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+
+  </style>
+</head>
+<body class="bg-white text-neutral-700 font-pop">
+
+  <!-- NAV -->
+  <header class="w-full bg-white border-b" aria-label="Main header">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <img src="/assets/logo.png" alt="Al Reys logo" class="h-10" />
+        <span class="hidden md:inline-block font-rock text-xl text-secondary">Al Reys</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a class="hover:text-primary" href="#home">Home</a>
+        <a class="hover:text-primary" href="#about">About Us</a>
+        <a class="hover:text-primary" href="#menu">Our Menu</a>
+        <a class="hover:text-primary" href="#contact">Contact Us</a>
+      </nav>
+      <div class="md:hidden">
+        <button id="navToggle" class="p-2 rounded-md border"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero-bg" style="background-image:url('/assets/hero.jpg')">
+    <div class="bg-[rgba(0,0,0,0.45)]">
+      <div class="max-w-6xl mx-auto px-6 py-36 text-center">
+        <h1 class="text-4xl md:text-6xl font-lemon text-white hero-title">Welcome to Alreys<br /><span class="block">Somali Restaurant</span></h1>
+        <p class="mt-6 max-w-3xl mx-auto text-neutral-200 text-left md:text-center">At Alreys, we bring you the true taste of Somali and Mediterranean cuisine, served with warmth and hospitality. Located in the heart of town, our restaurant offers a comfortable and stylish dining space with ample seating capacity, making it perfect for families, friends, and groups of all sizes.<br/><br/>Whether you’re looking for a relaxed lunch, a memorable dinner, or a place to celebrate a special occasion, Alreys is here to make your experience unforgettable. We also provide convenient on-site parking, ensuring your visit is as stress-free as possible.<br/><br/>Come and savour authentic dishes prepared with the finest ingredients, blending rich Somali flavours with the freshness of Mediterranean cooking.</p>
+        <a class="inline-block mt-8 bg-primary text-secondary px-6 py-3 rounded shadow font-semibold" href="#about">Our Story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-column quote card (centered) -->
+  <section class="-mt-16 max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="glass-card p-8 rounded-md text-center">
+        <div class="text-4xl c-quote">“</div>
+        <h3 class="mt-4 font-rock text-lg">Savour</h3>
+        <p class="mt-3 text-sm">At Al Reys we serve authentic traditional Somali dishes crafted with fresh local produce and a heritage of flavour.</p>
+      </div>
+      <div class="glass-card p-8 rounded-md text-center">
+        <div class="text-4xl c-quote">“</div>
+        <h3 class="mt-4 font-rock text-lg">Somali</h3>
+        <p class="mt-3 text-sm">Our menu features classics from Somali regions, prepared with care and respect for tradition.</p>
+      </div>
+      <div class="glass-card p-8 rounded-md text-center">
+        <div class="text-4xl c-quote">“</div>
+        <h3 class="mt-4 font-rock text-lg">Flavour</h3>
+        <p class="mt-3 text-sm">Experience the rich spices, tender meats, and comforting rice recipes passed down through generations.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="max-w-6xl mx-auto px-6 py-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h4 class="text-sm text-primary font-semibold">WELCOME</h4>
+        <h2 class="mt-4 text-2xl md:text-3xl font-rock">About Alreys Somali Restaurant</h2>
+        <p class="mt-4 text-sm">At Alreys, we bring the true taste of Somali and Mediterranean cuisine to our guests. Our menu is a celebration of flavour, culture, and tradition — each dish is freshly prepared to bring you an authentic taste of Somali heritage alongside classic Mediterranean favourites. We offer a warm dining atmosphere, generous seating, and convenient on-site parking for your comfort.</p>
+        <p class="mt-4 text-sm font-medium">Bookings for Parties &amp; Occasions: Looking for the perfect place to celebrate? Alreys offers the ideal venue for birthdays, family gatherings, business dinners, and private events. Book in advance to secure your date and let our team take care of the rest.</p>
+        <a class="inline-block mt-6 bg-primary text-secondary px-5 py-2 rounded shadow font-medium" href="#menu">See Our Menu</a>
+      </div>
+      <div>
+        <img src="/assets/about.jpg" alt="About image" class="w-full rounded-lg shadow-md" />
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO COLUMN FEATURE with dark panel -->
+  <section class="max-w-6xl mx-auto px-6 py-12">
+    <div class="grid md:grid-cols-2 gap-6 items-center">
+      <img src="/assets/food-collage.jpg" alt="Food collage" class="w-full rounded-lg shadow-md" />
+      <div class="bg-secondary text-white p-10 rounded-lg">
+        <h3 class="text-lg font-rock">Traditional Halal Somali Cuisine</h3>
+        <p class="mt-4 text-sm leading-relaxed">100% HALAL Food. We cook with care, ensuring that all our ingredients are sourced from trusted suppliers. Our Express Service ensures hot meals quickly when you're on the go.</p>
+        <ul class="mt-6 space-y-3">
+          <li class="flex items-start gap-3"><span class="w-8 h-8 rounded-full bg-primary grid place-items-center text-secondary font-bold">✓</span> <span>Authentic Recipes</span></li>
+          <li class="flex items-start gap-3"><span class="w-8 h-8 rounded-full bg-primary grid place-items-center text-secondary font-bold">⏱</span> <span>Fast Service</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE DISHES -->
+  <section id="menu" class="max-w-6xl mx-auto px-6 py-16 text-center">
+    <h3 class="text-sm text-primary font-semibold">OUR MENU</h3>
+    <h2 class="mt-2 text-2xl font-rock">A Taste of Somalia and the Mediterranean</h2>
+    <p class="mt-4 max-w-3xl mx-auto text-sm">Our menu is a celebration of flavour, culture, and tradition. Each dish is freshly prepared to bring you an authentic taste of Somali heritage alongside classic Mediterranean favourites. Whether you’re trying Somali cuisine for the first time or returning for your favourites, our menu has something for everyone.</p>
+
+    <div class="mt-8 max-w-3xl mx-auto text-left">
+      <ul class="list-disc pl-5 space-y-2 text-sm">
+        <li><strong>Starters</strong> – Light bites and appetisers to awaken your appetite.</li>
+        <li><strong>Main Courses</strong> – A variety of hearty Somali dishes, grilled meats, seafood, vegetarian options, and Mediterranean classics.</li>
+        <li><strong>Sides &amp; Salads</strong> – Freshly made to complement your meal.</li>
+        <li><strong>Desserts</strong> – Sweet delights to complete your dining experience.</li>
+        <li><strong>Drinks</strong> – A refreshing selection of soft drinks, teas, and speciality juices.</li>
+      </ul>
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow-sm">
+        <img src="/assets/dish1.jpg" alt="Dish" class="w-full h-36 object-cover rounded" />
+        <h4 class="mt-4 font-medium">GO Chicken & Rice</h4>
+        <p class="text-sm mt-2">Chicken leg on rice with special sauce.</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm">
+        <img src="/assets/dish2.jpg" alt="Dish" class="w-full h-36 object-cover rounded" />
+        <h4 class="mt-4 font-medium">GO Lamb & Rice</h4>
+        <p class="text-sm mt-2">Succulent lamb cooked in our spice blend.</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm">
+        <img src="/assets/dish3.jpg" alt="Dish" class="w-full h-36 object-cover rounded" />
+        <h4 class="mt-4 font-medium">GO Salmon & Rice</h4>
+        <p class="text-sm mt-2">Pan-seared salmon with aromatic rice.</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm">
+        <img src="/assets/dish4.jpg" alt="Dish" class="w-full h-36 object-cover rounded" />
+        <h4 class="mt-4 font-medium">GO Beef Biryani</h4>
+        <p class="text-sm mt-2">Fragrant beef biryani with traditional spices.</p>
+      </div>
+    </div>
+
+    <a class="inline-block mt-10 bg-primary text-secondary px-6 py-2 rounded shadow" href="#contact">Contact & Book</a>
+  </section>
+
+  <!-- CALL TO ACTION BAR -->
+  <section class="py-12" style="background:linear-gradient(0deg, rgba(206,176,46,0.12), rgba(206,176,46,0.12))">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <div>
+        <h3 class="text-xl font-medium">Please call us for more information.</h3>
+        <p class="text-sm">We are happy to assist with bookings and catering.</p>
+      </div>
+      <a href="tel:+0123456789" class="bg-secondary text-white px-4 py-2 rounded">Call Us: 01234 777 779</a>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="max-w-6xl mx-auto px-6 py-16">
+    <div class="text-center">
+      <h3 class="text-sm text-primary font-semibold">TESTIMONIALS</h3>
+      <h2 class="mt-2 text-2xl font-rock">What Our Customers Say!</h2>
+    </div>
+
+    <div class="mt-8 flex flex-col md:flex-row items-center gap-8 justify-center">
+      <div class="w-36 h-36 rounded-full overflow-hidden avatar-ring">
+        <img src="/assets/avatar.jpg" alt="Customer" class="w-full h-full object-cover" />
+      </div>
+      <div class="max-w-3xl bg-white p-8 rounded-lg shadow-md">
+        <p class="text-sm">"The food was absolutely delicious, big chunks of meat, chicken, and lamb… It was so beautiful. It’s Somali food, very authentic, so it felt proper like a home style."</p>
+        <div class="mt-4 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary grid place-items-center text-secondary font-bold">“</div>
+          <div>
+            <p class="font-medium">Latifs Inspired</p>
+            <p class="text-xs text-neutral-400">Customer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- COUNTERS & GALLERY -->
+  <section class="max-w-6xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <div class="bg-white p-6 rounded-lg shadow-sm">
+        <div class="grid grid-cols-4 text-center">
+          <div>
+            <div class="text-2xl font-bold">26</div>
+            <div class="text-xs text-neutral-400">Dishes</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold">75</div>
+            <div class="text-xs text-neutral-400">Spices</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold">5</div>
+            <div class="text-xs text-neutral-400">Desserts</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold">40</div>
+            <div class="text-xs text-neutral-400">Drinks</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-4 gap-4">
+        <img src="/assets/gallery1.jpg" class="w-full h-24 object-cover rounded" />
+        <img src="/assets/gallery2.jpg" class="w-full h-24 object-cover rounded" />
+        <img src="/assets/gallery3.jpg" class="w-full h-24 object-cover rounded" />
+        <img src="/assets/gallery4.jpg" class="w-full h-24 object-cover rounded" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-secondary text-neutral-200 py-10">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <img src="/assets/logo.png" alt="logo" class="h-10 mb-4" />
+        <p class="text-xs">Copyright © 2025 Al Reys. Design & Developed by You.</p>
+      </div>
+      <div>
+        <h4 class="font-medium">Opening Hours</h4>
+        <p class="text-xs mt-2">Mon - Sun 12:00 pm - 11:00 pm</p>
+      </div>
+      <div>
+        <h4 class="font-medium">Contact</h4>
+        <p class="text-xs mt-2">Address: 329 Wellingborough Rd, Northampton NN1 4EW<br/>Tel: 07843 784145 / 01604 218037<br/>E-mail: info@alreys.co.uk</p>
+        <div class="mt-3 flex items-center gap-3">
+          <a href="https://www.instagram.com/alreyssomalirestaurant/" target="_blank" rel="noreferrer" class="text-sm underline">Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61578677582714" target="_blank" rel="noreferrer" class="text-sm underline">Facebook</a>
+          <a href="https://www.tiktok.com/foryou?lang=en" target="_blank" rel="noreferrer" class="text-sm underline">TikTok</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    navToggle?.addEventListener('click', () => {
+      const nav = document.querySelector('header nav');
+      nav?.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
