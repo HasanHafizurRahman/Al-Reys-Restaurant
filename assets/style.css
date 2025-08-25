@@ -1,0 +1,285 @@
+        /* Local custom fonts (kept as your originals) */
+        @font-face {
+            font-family: 'Lemon Milk';
+            src: url('/assets/fonts/LemonMilk-Regular.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Rockwell';
+            src: url('/assets/fonts/Rockwell-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --primary: #CEB02E;
+            --secondary: #151515;
+            --testi-accent: #d84b2f;
+            --testi-teal: #8ec6c6;
+            --glass: rgba(255, 255, 255, 0.85);
+            --muted: #6b7280;
+        }
+
+        /* Ensure consistent section background */
+        section {
+            background-color: #ffffff;
+        }
+
+        /* small utility classes */
+        .font-lemon {
+            font-family: 'Lemon Milk', Poppins, sans-serif;
+        }
+
+        .font-rock {
+            font-family: 'Rockwell', 'Times New Roman', serif;
+        }
+
+        .font-pop {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-bg {
+            background-position: center;
+            background-size: cover;
+        }
+
+        /* glass card */
+        .glass-card {
+            background: var(--glass);
+            box-shadow: 0 18px 40px rgba(20, 20, 30, 0.08);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .testi-avatar {
+            width: 260px;
+            height: 260px;
+            border-radius: 9999px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+            object-fit: cover;
+            border: 10px solid rgba(255, 255, 255, 0.95);
+        }
+
+        .testi-quote-bubble {
+            width: 110px;
+            height: 110px;
+            border-radius: 9999px;
+            display: grid;
+            place-items: center;
+            background: var(--testi-accent);
+            color: white;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(30%);
+            overflow: visible;
+        }
+
+        /* large decorative quote */
+        .testi-big-quote {
+            position: absolute;
+            right: 6%;
+            top: 22%;
+            font-size: 160px;
+            line-height: .8;
+            pointer-events: none;
+            user-select: none;
+            font-family: serif;
+            opacity: .08;
+        }
+
+        /* subtle float */
+        @keyframes floatUp {
+            from {
+                transform: translateY(12px);
+                opacity: 0
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1
+            }
+        }
+
+        .animate-float {
+            animation: floatUp .6s ease both;
+        }
+
+        /* header */
+        .nav-item {
+            position: relative;
+            padding: 8px 6px;
+            color: #0f1724;
+            /* neutral dark */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            transition: color .18s ease;
+        }
+
+        .nav-item::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -8px;
+            height: 6px;
+            width: 0;
+            border-radius: 999px;
+            background: var(--primary);
+            transition: width .22s cubic-bezier(.2, .9, .2, 1), opacity .22s;
+            opacity: 0;
+        }
+
+        /* hover shows a short underline */
+        .nav-item:hover::after,
+        .nav-item:focus::after {
+            width: 40px;
+            opacity: 1;
+        }
+
+        /* the 'pill' (Contact) — slightly bigger and visible as active */
+        .nav-pill {
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 999px;
+        }
+
+        .nav-pill::after {
+            /* wider, visible underline for the "Contact" pill */
+            bottom: -10px;
+            height: 6px;
+            width: 0;
+        }
+
+        /* active state (applied by JS below) */
+        .nav-item.active::after {
+            width: 56px;
+            opacity: 1;
+        }
+
+        /* support for keyboard focus styling */
+        .nav-focus:focus {
+            outline: 3px solid rgba(206, 176, 46, 0.12);
+            outline-offset: 4px;
+            border-radius: .5rem;
+        }
+
+        /* small placement fix for mobile absolute menu */
+        #mobileNav {
+            z-index: 60;
+            left: 1rem;
+            right: 1rem;
+        }
+
+        /* testimonial slider small tweaks */
+        .slide {
+            display: none;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .45s ease, transform .45s ease;
+        }
+
+        .slide.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* pagination dots */
+        .testi-dots {
+            display: inline-flex;
+            gap: 8px;
+        }
+
+        .testi-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+        }
+
+        .testi-dot.active {
+            background: var(--primary);
+        }
+
+        /* reservation modal */
+        .modal-backdrop {
+            background: rgba(6, 6, 6, 0.45);
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap;
+            clip-path: inset(50%);
+            border: 0;
+            padding: 0;
+            margin: -1px;
+        }
+
+        /* improved focus states for accessibility */
+        a:focus,
+        button:focus,
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 3px solid rgba(206, 176, 46, 0.15);
+            outline-offset: 2px;
+            border-radius: 6px;
+        }
+
+        /* responsive avatar reduce */
+        @media (max-width: 767px) {
+            .testi-avatar {
+                width: 180px;
+                height: 180px;
+                border-width: 8px;
+            }
+
+            .testi-quote-bubble {
+                width: 80px;
+                height: 80px;
+            }
+
+            .testi-big-quote {
+                font-size: 90px;
+                right: 6%;
+                top: 10%;
+            }
+        }
+
+        /* Mobile modal close icon styles */
+        .modal-close-mobile {
+            display: none;
+        }
+
+        @media (max-width: 767px) {
+            .modal-close-mobile {
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                border-radius: 9999px;
+                background: rgba(255, 255, 255, 0.95);
+                border: 1px solid rgba(0, 0, 0, 0.06);
+                display: grid;
+                place-items: center;
+                box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+                z-index: 60;
+            }
+
+            /* ensure dialog has a little padding-top so the button doesn't overlap text */
+            [role="dialog"] {
+                padding-top: 48px;
+            }
+        }
