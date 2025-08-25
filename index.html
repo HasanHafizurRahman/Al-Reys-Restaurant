@@ -17,6 +17,10 @@
                             lemon: ['"Lemon Milk"', 'sans-serif'],
                             rockwell: ['"Rockwell"', 'serif'],
                             poppins: ['Poppins', 'sans-serif']
+                        },
+                        boxShadow: {
+                            'soft-lg': '0 18px 40px rgba(20,20,30,0.08)',
+                            'soft-md': '0 10px 28px rgba(20,20,30,0.06)'
                         }
                     }
                 }
@@ -25,11 +29,12 @@
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Poppins from Google for fallback / primary UI font -->
+    <!-- Poppins from Google -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
         rel="stylesheet">
 
     <style>
+        /* Local custom fonts (kept as your originals) */
         @font-face {
             font-family: 'Lemon Milk';
             src: url('/assets/fonts/LemonMilk-Regular.woff2') format('woff2');
@@ -49,30 +54,18 @@
         :root {
             --primary: #CEB02E;
             --secondary: #151515;
+            --testi-accent: #d84b2f;
+            --testi-teal: #8ec6c6;
+            --glass: rgba(255, 255, 255, 0.85);
+            --muted: #6b7280;
         }
 
-        .hero-bg {
-            background-position: center;
-            background-size: cover;
+        /* Ensure consistent section background */
+        section {
+            background-color: #ffffff;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 18px 40px rgba(20, 20, 30, 0.08);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-        }
-
-        .c-quote {
-            color: var(--primary);
-        }
-
-        .dots {
-            background-image: radial-gradient(currentColor 1px, transparent 1px);
-            background-size: 10px 10px;
-            opacity: .08
-        }
-
+        /* small utility classes */
         .font-lemon {
             font-family: 'Lemon Milk', Poppins, sans-serif;
         }
@@ -82,18 +75,58 @@
         }
 
         .font-pop {
-            font-family: Poppins, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
-        .hero-title {
-            text-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+        .hero-bg {
+            background-position: center;
+            background-size: cover;
         }
 
-        .avatar-ring {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        /* glass card */
+        .glass-card {
+            background: var(--glass);
+            box-shadow: 0 18px 40px rgba(20, 20, 30, 0.08);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
         }
 
-        /* subtle entrance animation */
+        .testi-avatar {
+            width: 260px;
+            height: 260px;
+            border-radius: 9999px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+            object-fit: cover;
+            border: 10px solid rgba(255, 255, 255, 0.95);
+        }
+
+        .testi-quote-bubble {
+            width: 110px;
+            height: 110px;
+            border-radius: 9999px;
+            display: grid;
+            place-items: center;
+            background: var(--testi-accent);
+            color: white;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(30%);
+            overflow: visible;
+        }
+
+        /* large decorative quote */
+        .testi-big-quote {
+            position: absolute;
+            right: 6%;
+            top: 22%;
+            font-size: 160px;
+            line-height: .8;
+            pointer-events: none;
+            user-select: none;
+            font-family: serif;
+            opacity: .08;
+        }
+
+        /* subtle float */
         @keyframes floatUp {
             from {
                 transform: translateY(12px);
@@ -109,93 +142,202 @@
         .animate-float {
             animation: floatUp .6s ease both;
         }
+
+        /* header */
+        header {
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .nav-focus:focus {
+            outline: 3px solid rgba(206, 176, 46, 0.18);
+            outline-offset: 3px;
+            border-radius: .375rem;
+        }
+
+        /* testimonial slider small tweaks */
+        .slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        /* reservation modal */
+        .modal-backdrop {
+            background: rgba(6, 6, 6, 0.45);
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap;
+            clip-path: inset(50%);
+            border: 0;
+            padding: 0;
+            margin: -1px;
+        }
+
+        /* improved focus states for accessibility */
+        a:focus,
+        button:focus,
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 3px solid rgba(206, 176, 46, 0.15);
+            outline-offset: 2px;
+            border-radius: 6px;
+        }
+
+        /* responsive avatar reduce */
+        @media (max-width: 767px) {
+            .testi-avatar {
+                width: 180px;
+                height: 180px;
+                border-width: 8px;
+            }
+
+            .testi-quote-bubble {
+                width: 80px;
+                height: 80px;
+            }
+
+            .testi-big-quote {
+                font-size: 90px;
+                right: 6%;
+                top: 10%;
+            }
+        }
     </style>
 </head>
 
-<body class="bg-white text-neutral-700 font-pop">
+<body class="bg-white text-neutral-700 font-pop antialiased">
 
-    <!-- NAV remains unchanged -->
-    <header class="w-full bg-white border-b" aria-label="Main header">
+    <!-- TOP BAR -->
+    <div class="bg-[rgba(21,21,21,0.02)] border-b">
+        <div class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between text-xs text-neutral-500">
+            <div>Open daily • Parking available • Halal Certified</div>
+            <div class="flex items-center gap-4">
+                <a href="tel:07843784145" class="hover:text-primary">07843 784145</a>
+                <a href="mailto:info@alreys.co.uk" class="hover:text-primary">info@alreys.co.uk</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <header class="w-full sticky top-0 z-40 bg-white/60 border-b">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <img src="/assets/logo.png" alt="Al Reys logo" class="h-10" />
+                <a href="#home" class="flex items-center gap-3" aria-label="Al Reys Home">
+                    <img src="/assets/logo.png" alt="Al Reys logo" class="h-10" />
+                    <span class="text-sm font-medium hidden sm:block">Al Reys</span>
+                </a>
             </div>
-            <nav class="hidden md:flex items-center gap-6 text-sm">
-                <a class="hover:text-primary" href="#home">Home</a>
-                <a class="hover:text-primary" href="#about">About Us</a>
-                <a class="hover:text-primary" href="#menu">Our Menu</a>
-                <a class="hover:text-primary" href="#contact">Contact Us</a>
+
+            <nav id="main-nav" class="hidden md:flex items-center gap-6 text-sm" aria-label="Main navigation">
+                <a class="hover:text-primary nav-focus" href="#home">Home</a>
+                <a class="hover:text-primary nav-focus" href="#about">About</a>
+                <a class="hover:text-primary nav-focus" href="#menu">Our Menu</a>
+                <a class="hover:text-primary nav-focus" href="#testimonials">Testimonials</a>
+                <!-- contact anchor will scroll to footer -->
+                <a class="hover:text-primary nav-focus" href="#contact">Contact</a>
             </nav>
-            <div class="md:hidden">
-                <button id="navToggle" class="p-2 rounded-md border"><svg xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+            <div class="flex items-center gap-3">
+                <button id="bookBtn"
+                    class="hidden md:inline-flex items-center gap-2 bg-primary text-secondary px-5 py-2 rounded shadow-sm font-semibold hover:scale-[1.02] transition focus:outline-none"
+                    aria-haspopup="dialog">
+                    <!-- phone icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M2 3h20v4H2zM3 8h18l-1 11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2L3 8z" />
+                    </svg>
+                    Book a Table
+                </button>
+
+                <button id="navToggle" aria-expanded="false" aria-controls="mobileNav"
+                    class="md:hidden p-2 rounded-md border nav-focus" aria-label="Open menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="hamburger" class="h-5 w-5 transition-transform"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
-                    </svg></button>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile nav -->
+        <div id="mobileNav" class="md:hidden hidden border-t">
+            <div class="px-6 py-3 flex flex-col gap-2">
+                <a href="#home" class="py-2">Home</a>
+                <a href="#about" class="py-2">About</a>
+                <a href="#menu" class="py-2">Our Menu</a>
+                <a href="#testimonials" class="py-2">Testimonials</a>
+                <a href="#contact" class="py-2">Contact</a>
+                <button id="mobileBookBtn" class="mt-2 bg-primary text-secondary px-4 py-2 rounded">Book a
+                    Table</button>
             </div>
         </div>
     </header>
 
-    <!-- IMPROVED HERO -->
-    <section id="home" class="hero-bg relative min-h-[65vh] md:min-h-[75vh]"
+    <!-- HERO -->
+    <section id="home" class="hero-bg relative min-h-[72vh] md:min-h-[80vh]"
         style="background-image:url('/assets/hero.jpg')">
-        <!-- gradient overlay for better contrast -->
-        <div class="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.6)] to-[rgba(0,0,0,0.35)]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.55)] to-[rgba(0,0,0,0.35)]"></div>
 
         <div
-            class="relative z-10 max-w-7xl mx-auto px-6 py-32 md:py-44 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <!-- Left: headline + CTA -->
-            <div class="text-left text-white animate-float">
+            class="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <!-- Left: headline -->
+            <div class="text-white animate-float">
                 <h1 class="text-3xl md:text-5xl lg:text-6xl font-lemon hero-title leading-tight">Welcome to <span
                         class="block">Al Reys — Somali Restaurant</span></h1>
-                <p class="mt-4 max-w-xl text-neutral-200">Authentic Somali &amp; Mediterranean flavours, served with
-                    warmth. Fresh ingredients, family recipes, and a welcoming atmosphere.</p>
+                <p class="mt-4 max-w-xl text-neutral-200">Authentic Somali & Mediterranean flavours, served with warmth.
+                    Fresh ingredients, family recipes, and a welcoming atmosphere.</p>
 
                 <div class="mt-6 flex flex-wrap gap-3">
-                    <a class="inline-flex items-center gap-3 bg-primary text-secondary px-6 py-3 rounded shadow font-semibold hover:scale-[1.02] transition"
-                        href="#about">
-                        <!-- phone icon -->
+                    <button id="heroBook"
+                        class="inline-flex items-center gap-3 bg-primary text-secondary px-6 py-3 rounded shadow font-semibold hover:scale-[1.02] transition"
+                        aria-haspopup="dialog">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M2 3h20v4H2zM3 8h18l-1 11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2L3 8z" />
                         </svg>
-                        Book a Table
-                    </a>
+                        Reserve
+                    </button>
 
                     <a class="inline-flex items-center gap-2 border border-neutral-200 text-white/90 px-5 py-3 rounded hover:bg-white/5 transition"
                         href="#menu">View Menu</a>
                 </div>
 
                 <div class="mt-6 flex items-center gap-6 text-sm text-neutral-300">
-                    <div class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor">
+                    <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M3 7h18M6 7v10a3 3 0 003 3h6a3 3 0 003-3V7" />
-                        </svg>
-                        <span>Parking available</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor">
+                        </svg> Parking available</div>
+                    <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M12 2v4M6 6h12" />
-                        </svg>
-                        <span>Halal Certified</span>
-                    </div>
+                        </svg> Halal Certified</div>
                 </div>
             </div>
 
-            <!-- Right: hero feature card with sample dish image -->
+            <!-- Right: feature card -->
             <div class="relative">
-                <div class="glass-card p-6 rounded-2xl shadow-xl overflow-hidden">
+                <div class="glass-card p-6 rounded-2xl shadow-soft-lg overflow-hidden border border-white/40">
                     <div class="grid grid-cols-3 gap-4 items-center">
                         <img src="/assets/hero-dish.jpg" alt="Signature dish"
                             class="col-span-2 w-full h-36 object-cover rounded-lg shadow-sm" />
                         <div class="space-y-2">
                             <div class="text-xs text-neutral-400">Signature</div>
-                            <h4 class="font-medium">GO Chicken & Rice</h4>
+                            <h4 class="font-medium">Hilib (Lamb Shank)</h4>
                             <p class="text-xs text-neutral-500">House special with aromatic sauce</p>
 
                             <div class="mt-3 flex items-center gap-2">
@@ -207,69 +349,126 @@
                     </div>
                 </div>
 
-                <!-- decorative badge -->
                 <div class="absolute -top-4 right-3 bg-white/95 px-3 py-2 rounded-lg shadow-md text-xs font-medium">
                     Popular Dish</div>
             </div>
         </div>
     </section>
 
-    <!-- ENHANCED 3-COLUMN CARDS (quotes) with icons -->
-    <section class="-mt-24 max-w-7xl mx-auto px-6 relative z-20">
+    <!-- 3-COLUMN HIGHLIGHTS (transparent — no white bg around cards) -->
+    <section id="highlights" class="-mt-20 max-w-7xl mx-auto px-6 relative z-20" style="background: transparent;">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             <!-- Card 1 -->
-            <div class="glass-card p-8 rounded-md text-center flex flex-col items-center gap-4">
-                <div
-                    class="w-16 h-16 rounded-full grid place-items-center bg-primary text-secondary font-bold shadow-md">
-                    <!-- spice icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M12 3v2M7 6l-1 2m12-2l1 2M4 13h16M9 21h6" />
-                    </svg>
+            <article
+                class="group relative rounded-2xl p-6 flex flex-col gap-4 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition-all duration-300 focus-within:ring-2 focus-within:ring-[rgba(206,176,46,0.12)] bg-white border border-white/6 backdrop-blur-sm"
+                role="article" aria-label="Savour — Authentic dishes">
+                <div class="flex items-start gap-4">
+                    <div
+                        class="flex-shrink-0 w-16 h-16 rounded-full grid place-items-center bg-gradient-to-br from-[var(--primary)] to-[#f59e42] text-[var(--secondary)] font-bold shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 2v6m0 0c4 0 6 2 6 6v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4c0-4 2-6 6-6zM8 10H6" />
+                        </svg>
+                    </div>
+
+                    <div>
+                        <h3 class="font-rock text-lg">Savour</h3>
+                        <p class="mt-1 text-sm text-neutral-600">Authentic traditional Somali dishes crafted with fresh
+                            local produce — honest, bold flavours that feel like home.</p>
+                    </div>
                 </div>
-                <h3 class="mt-2 font-rock text-lg">Savour</h3>
-                <p class="mt-2 text-sm text-neutral-600">Authentic traditional Somali dishes crafted with fresh local
-                    produce and a heritage of flavour.</p>
-            </div>
+
+                <div class="mt-auto flex items-center justify-between">
+                    <div class="text-xs text-neutral-400">Chef-curated</div>
+                    <a href="/menu"
+                        class="inline-flex items-center gap-2 text-sm font-semibold nav-focus text-[var(--primary)]">
+                        View dishes
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                    </a>
+                </div>
+            </article>
 
             <!-- Card 2 -->
-            <div class="glass-card p-8 rounded-md text-center flex flex-col items-center gap-4">
-                <div
-                    class="w-16 h-16 rounded-full grid place-items-center bg-primary text-secondary font-bold shadow-md">
-                    <!-- map/heritage icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M9 6l2-2 4 4 4-2v11a1 1 0 01-1 1H6a1 1 0 01-1-1V6z" />
-                    </svg>
+            <article
+                class="group relative rounded-2xl p-6 flex flex-col gap-4 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition-all duration-300 focus-within:ring-2 focus-within:ring-[rgba(206,176,46,0.12)] bg-white border border-white/6 backdrop-blur-sm"
+                role="article" aria-label="Somali — Regional classics">
+                <div class="flex items-start gap-4">
+                    <div
+                        class="flex-shrink-0 w-16 h-16 rounded-full grid place-items-center bg-gradient-to-br from-[#8ec6c6] to-[var(--testi-accent)] text-white font-bold shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 6v12m-7-6h14" />
+                        </svg>
+                    </div>
+
+                    <div>
+                        <h3 class="font-rock text-lg">Somali</h3>
+                        <p class="mt-1 text-sm text-neutral-600">Regional classics and family recipes — from hearty
+                            stews to fragrant rice, prepared with respect for tradition.</p>
+                    </div>
                 </div>
-                <h3 class="mt-2 font-rock text-lg">Somali</h3>
-                <p class="mt-2 text-sm text-neutral-600">Our menu features classics from Somali regions, prepared with
-                    care and respect for tradition.</p>
-            </div>
+
+                <div class="mt-auto flex items-center justify-between">
+                    <div class="text-xs text-neutral-400">Traditional</div>
+                    <a href="/menu#somali"
+                        class="inline-flex items-center gap-2 text-sm font-semibold nav-focus text-[var(--primary)]">
+                        Learn more
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                    </a>
+                </div>
+            </article>
 
             <!-- Card 3 -->
-            <div class="glass-card p-8 rounded-md text-center flex flex-col items-center gap-4">
-                <div
-                    class="w-16 h-16 rounded-full grid place-items-center bg-primary text-secondary font-bold shadow-md">
-                    <!-- flame/flavour icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M12 2s4 3 4 6a4 4 0 11-8 0c0-3 4-6 4-6zM8 20h8" />
-                    </svg>
+            <article
+                class="group relative rounded-2xl p-6 flex flex-col gap-4 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition-all duration-300 focus-within:ring-2 focus-within:ring-[rgba(206,176,46,0.12)] bg-white border border-white/6 backdrop-blur-sm"
+                role="article" aria-label="Flavour — spices & technique">
+                <div class="flex items-start gap-4">
+                    <div
+                        class="flex-shrink-0 w-16 h-16 rounded-full grid place-items-center bg-gradient-to-br from-[#f05323] to-[var(--testi-accent)] text-white font-bold shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 3v3m0 12v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3m16 0h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
+                        </svg>
+                    </div>
+
+                    <div>
+                        <h3 class="font-rock text-lg">Flavour</h3>
+                        <p class="mt-1 text-sm text-neutral-600">Bold spice blends, tender meats and balanced sides — a
+                            mix of Somali warmth and Mediterranean freshness.</p>
+                    </div>
                 </div>
-                <h3 class="mt-2 font-rock text-lg">Flavour</h3>
-                <p class="mt-2 text-sm text-neutral-600">Experience rich spices, tender meats, and comforting rice
-                    recipes passed down through generations.</p>
-            </div>
+
+                <div class="mt-auto flex items-center justify-between">
+                    <div class="text-xs text-neutral-400">House spice blend</div>
+                    <a href="/menu#specials"
+                        class="inline-flex items-center gap-2 text-sm font-semibold nav-focus text-[var(--primary)]">
+                        See specials
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                    </a>
+                </div>
+            </article>
 
         </div>
     </section>
 
-    <!-- ABOUT (new) -->
+
+    <!-- ABOUT -->
     <section id="about" class="max-w-7xl mx-auto px-6 py-20">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div class="space-y-4">
@@ -299,54 +498,51 @@
                         <div class="w-8 h-8 grid place-items-center rounded bg-secondary text-white">P</div>
                         <div>
                             <div class="font-medium">Parking</div>
-                            <div class="text-xs text-neutral-500">On-site &amp; convenient</div>
+                            <div class="text-xs text-neutral-500">On-site & convenient</div>
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
                         <div class="w-8 h-8 grid place-items-center rounded bg-secondary text-white">F</div>
                         <div>
                             <div class="font-medium">Family Friendly</div>
-                            <div class="text-xs text-neutral-500">Great for groups &amp; kids</div>
+                            <div class="text-xs text-neutral-500">Great for groups & kids</div>
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
                         <div class="w-8 h-8 grid place-items-center rounded bg-secondary text-white">C</div>
                         <div>
                             <div class="font-medium">Catering</div>
-                            <div class="text-xs text-neutral-500">Parties &amp; events</div>
+                            <div class="text-xs text-neutral-500">Parties & events</div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div>
-                <div class="relative rounded-lg overflow-hidden shadow-lg">
+                <div class="relative rounded-lg overflow-hidden shadow-soft-md">
                     <img src="/assets/about.jpg" alt="About Alreys" class="w-full h-80 object-cover" />
                     <div class="absolute bottom-4 left-4 bg-white/90 px-3 py-2 rounded-lg text-sm font-medium">Authentic
-                        Somali &amp; Mediterranean</div>
+                        Somali & Mediterranean</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SIGNATURE DISHES (small UX improvements: hover lift + icon) -->
+    <!-- MENU PREVIEW -->
     <section id="menu" class="max-w-7xl mx-auto px-6 py-16 text-center">
         <h3 class="text-sm text-primary font-semibold">OUR MENU</h3>
         <h2 class="mt-2 text-2xl font-rock">A Taste of Somalia and the Mediterranean</h2>
-
         <p class="mt-4 max-w-3xl mx-auto text-sm">Our menu is a celebration of flavour, culture, and tradition. Below
             are a few customer favourites from our menu — all items are taken directly from the full menu.</p>
 
-        <!-- Featured items grid (home page compact) - strictly from user's list -->
         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-
-            <!-- Card 1: Chicken Wap -->
+            <!-- Item -->
             <article
                 class="bg-white rounded-lg shadow-sm hover:shadow-lg transition transform hover:-translate-y-1 overflow-hidden"
                 role="button" tabindex="0" aria-label="Chicken Wap — £12.99">
                 <div class="relative">
                     <img src="/assets/dish1.jpg" alt="Chicken Wap" class="w-full h-44 object-cover" />
-                    <div class="absolute top-3 right-3 bg-white/90 px-2 py-1 rounded text-xs">£12.99</div>
+                    <div class="absolute top-3 right-3 bg-white/95 px-2 py-1 rounded text-xs">£12.99</div>
                 </div>
                 <div class="p-4 text-left">
                     <h4 class="font-medium">Chicken Wap</h4>
@@ -359,13 +555,12 @@
                 </div>
             </article>
 
-            <!-- Card 2: Kilyo (Kidneys) -->
             <article
                 class="bg-white rounded-lg shadow-sm hover:shadow-lg transition transform hover:-translate-y-1 overflow-hidden"
                 role="button" tabindex="0" aria-label="Kilyo (Kidneys) — £7.99">
                 <div class="relative">
                     <img src="/assets/dish2.jpg" alt="Kilyo (Kidneys)" class="w-full h-44 object-cover" />
-                    <div class="absolute top-3 right-3 bg-white/90 px-2 py-1 rounded text-xs">£7.99</div>
+                    <div class="absolute top-3 right-3 bg-white/95 px-2 py-1 rounded text-xs">£7.99</div>
                 </div>
                 <div class="p-4 text-left">
                     <h4 class="font-medium">Kilyo (Kidneys)</h4>
@@ -377,13 +572,12 @@
                 </div>
             </article>
 
-            <!-- Card 3: Hilib (Lamb Shank) -->
             <article
                 class="bg-white rounded-lg shadow-sm hover:shadow-lg transition transform hover:-translate-y-1 overflow-hidden"
                 role="button" tabindex="0" aria-label="Hilib (Lamb Shank) — £15.99">
                 <div class="relative">
                     <img src="/assets/dish3.jpg" alt="Hilib (Lamb Shank)" class="w-full h-44 object-cover" />
-                    <div class="absolute top-3 right-3 bg-white/90 px-2 py-1 rounded text-xs">£15.99</div>
+                    <div class="absolute top-3 right-3 bg-white/95 px-2 py-1 rounded text-xs">£15.99</div>
                 </div>
                 <div class="p-4 text-left">
                     <h4 class="font-medium">Hilib (Lamb Shank)</h4>
@@ -403,92 +597,263 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section id="testimonials" class="py-12 bg-[linear-gradient(180deg,#f8f6ec,white)]">
+    <!-- TESTIMONIALS (slider) — now uses the standard section background for visual consistency -->
+    <section id="testimonials" class="testi-section py-16">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-8">
-                <h3 class="text-sm text-primary font-semibold">TESTIMONIALS</h3>
-                <h2 class="mt-2 text-2xl font-rock">What Our Customers Say</h2>
-                <p class="mt-2 text-sm text-neutral-600 max-w-2xl mx-auto">Real feedback from our guests — food, service
-                    and atmosphere that bring people back.</p>
+            <div class="text-center md:text-left mb-8">
+                <div class="text-sm text-primary font-semibold tracking-widest">TESTIMONIALS</div>
+                <h2 class="mt-3 text-4xl md:text-5xl font-lemon text-[ #0a1720 ] leading-tight">What Our Customers Say!
+                </h2>
+                <p class="mt-4 text-sm text-neutral-600 max-w-2xl">Real feedback from our guests — food, service and
+                    atmosphere that bring people back.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <figure class="bg-white p-6 rounded-lg shadow-sm">
-                    <div class="flex items-center gap-4">
-                        <img src="/assets/avatar1.jpg" alt="Customer avatar"
-                            class="w-14 h-14 rounded-full object-cover" />
-                        <div>
-                            <div class="font-medium">Latifs Inspired</div>
-                            <div class="text-xs text-neutral-400">Customer</div>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative">
+                <div class="flex flex-col items-center md:items-start justify-center space-y-6">
+                    <img src="/assets/avatar1.jpg" alt="Customer avatar" class="testi-avatar" />
+                    <div class="hidden md:block dots w-24 h-6 opacity-20"></div>
+                    <div class="testi-quote-bubble" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M16.25 15.5c-1.837-.794-2.5-1.5-2.5-3.5S15 8.75 17 8.75S20.25 10 20.25 12c0 3.5-1 4.75-5 7.25c1-1.75 1-2.25 1-3.75m-10 0c-1.837-.794-2.5-1.5-2.5-3.5S5 8.75 7 8.75S10.25 10 10.25 12c0 3.5-1 4.75-5 7.25c1-1.75 1-2.25 1-3.75" />
+                        </svg>
                     </div>
-                    <blockquote class="mt-4 text-sm text-neutral-600">“The food was absolutely delicious, big chunks of
-                        meat, chicken, and lamb… It felt proper like a home style.”</blockquote>
-                </figure>
+                </div>
 
-                <figure class="bg-white p-6 rounded-lg shadow-sm">
-                    <div class="flex items-center gap-4">
-                        <img src="/assets/avatar2.jpg" alt="Customer avatar"
-                            class="w-14 h-14 rounded-full object-cover" />
-                        <div>
-                            <div class="font-medium">Aamina Yusuf</div>
-                            <div class="text-xs text-neutral-400">Regular</div>
-                        </div>
+                <div class="relative">
+                    <div class="testi-big-quote" aria-hidden="true">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                            focusable="false">
+                            <g fill="rgba(216,75,47,0.08)">
+                                <path
+                                    d="M60 50 C50 50, 42 58, 42 68 C42 88, 68 98, 78 95 C84 93, 80 85, 74 80 C68 76, 64 70, 60 50 Z" />
+                                <path
+                                    d="M74 95 C70 110, 68 128, 78 138 C82 142, 88 136, 88 128 C88 120, 86 110, 74 95 Z" />
+                                <path
+                                    d="M120 50 C110 50, 102 58, 102 68 C102 88, 128 98, 138 95 C144 93, 140 85, 134 80 C128 76, 124 70, 120 50 Z" />
+                                <path
+                                    d="M134 95 C130 110, 128 128, 138 138 C142 142, 148 136, 148 128 C148 120, 146 110, 134 95 Z" />
+                            </g>
+                        </svg>
                     </div>
-                    <blockquote class="mt-4 text-sm text-neutral-600">“Warm hospitality and flavours. Perfect for family
-                        dinners — the kids love the rice dishes.”</blockquote>
-                </figure>
 
-                <figure class="bg-white p-6 rounded-lg shadow-sm">
-                    <div class="flex items-center gap-4">
-                        <img src="/assets/avatar3.jpg" alt="Customer avatar"
-                            class="w-14 h-14 rounded-full object-cover" />
-                        <div>
-                            <div class="font-medium">Mohamed Ali</div>
-                            <div class="text-xs text-neutral-400">Food Blogger</div>
+                    <!-- slider container -->
+                    <div id="testimonialSlider" class="max-w-xl relative">
+                        <div class="slide active">
+                            <p class="text-neutral-700 text-base md:text-lg leading-relaxed">The food was absolutely
+                                delicious, big chunks of meat, chicken, and lamb, and with some rice. It was so
+                                beautiful. It’s Somalian food, very authentic, so it’ll be proper like a home style, so
+                                you’ll be going into someone’s house and having that sort of food, so let’s go and check
+                                it out.</p>
+                            <div class="mt-8 flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full grid place-items-center"
+                                    style="background:var(--testi-teal);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M12 12a4 4 0 10-0-8 4 4 0 000 8zM4 20a8 8 0 0116 0" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-neutral-800">Latifs Inspired</div>
+                                    <div class="text-xs text-neutral-400">Customer</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add more slides if needed -->
+                        <div class="slide">
+                            <p class="text-neutral-700 text-base md:text-lg leading-relaxed">Amazing service — the staff
+                                were welcoming and the portions were generous. We will definitely return for the lamb
+                                shank!</p>
+                            <div class="mt-8 flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full grid place-items-center"
+                                    style="background:var(--testi-teal);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M12 12a4 4 0 10-0-8 4 4 0 000 8zM4 20a8 8 0 0116 0" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-neutral-800">Sofia Ahmed</div>
+                                    <div class="text-xs text-neutral-400">Customer</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- slider controls -->
+                        <div class="mt-6 flex items-center gap-3">
+                            <button id="prevTesti" class="px-3 py-2 rounded bg-white border shadow-sm nav-focus"
+                                aria-label="Previous testimonial">&larr;</button>
+                            <button id="nextTesti" class="px-3 py-2 rounded bg-white border shadow-sm nav-focus"
+                                aria-label="Next testimonial">&rarr;</button>
+                            <div class="ml-auto text-xs text-neutral-400">Read more on our socials</div>
                         </div>
                     </div>
-                    <blockquote class="mt-4 text-sm text-neutral-600">“A brilliant blend of Somali and Mediterranean
-                        flavours — every plate tells a story.”</blockquote>
-                </figure>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer kept as-is for context -->
-    <footer class="py-10">
+    <!-- FOOTER (now contains contact info and uses secondary color background) -->
+    <footer id="contact" class="py-10" style="background:var(--secondary); color: white;">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
                 <img src="/assets/logo.png" alt="logo" class="h-10 mb-4" />
-                <p class="text-xs">Copyright © 2025 Al Reys. Design & Developed by You.</p>
+                <p class="text-xs text-neutral-300">Copyright © 2025 Al Reys. Design & Developed by You.</p>
             </div>
             <div>
-                <h4 class="font-medium">Opening Hours</h4>
-                <p class="text-xs mt-2">Mon - Sun 12:00 pm - 11:00 pm</p>
+                <h4 class="font-medium text-white">Opening Hours</h4>
+                <p class="text-xs mt-2 text-neutral-300">Mon - Sun 12:00 pm - 11:00 pm</p>
             </div>
             <div>
-                <h4 class="font-medium">Contact</h4>
-                <p class="text-xs mt-2">Address: 329 Wellingborough Rd, Northampton NN1 4EW<br />Tel: 07843 784145 /
-                    01604 218037<br />E-mail: info@alreys.co.uk</p>
+                <h4 class="font-medium text-white">Contact</h4>
+                <p class="text-xs mt-2 text-neutral-300">329 Wellingborough Rd, Northampton NN1 4EW<br />Tel: <a
+                        href="tel:07843784145" class="underline text-white hover:text-[var(--primary)]">07843 784145</a>
+                    / <a href="tel:01604218037" class="underline text-white hover:text-[var(--primary)]">01604
+                        218037</a><br />E-mail: <a href="mailto:info@alreys.co.uk"
+                        class="underline text-white hover:text-[var(--primary)]">info@alreys.co.uk</a></p>
                 <div class="mt-3 flex items-center gap-3">
                     <a href="https://www.instagram.com/alreyssomalirestaurant/" target="_blank" rel="noreferrer"
-                        class="text-sm underline">Instagram</a>
+                        class="text-sm underline text-white hover:text-[var(--primary)]">Instagram</a>
                     <a href="https://www.facebook.com/profile.php?id=61578677582714" target="_blank" rel="noreferrer"
-                        class="text-sm underline">Facebook</a>
+                        class="text-sm underline text-white hover:text-[var(--primary)]">Facebook</a>
                     <a href="https://www.tiktok.com/foryou?lang=en" target="_blank" rel="noreferrer"
-                        class="text-sm underline">TikTok</a>
+                        class="text-sm underline text-white hover:text-[var(--primary)]">TikTok</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Reservation Modal (simple accessible) -->
+    <div id="modalBackdrop" class="fixed inset-0 hidden items-center justify-center modal-backdrop z-50">
+        <div role="dialog" aria-modal="true" aria-labelledby="reserveTitle"
+            class="bg-white rounded-lg max-w-md w-full mx-4 p-6 shadow-soft-lg">
+            <div class="flex items-start justify-between gap-4">
+                <div>
+                    <h3 id="reserveTitle" class="text-lg font-medium">Reserve a Table</h3>
+                    <p class="text-xs text-neutral-500">Fill the details and we'll contact you to confirm.</p>
+                </div>
+                <button id="closeModal" aria-label="Close reservation" class="text-neutral-500 nav-focus">✕</button>
+            </div>
+
+            <form id="reserveForm" class="mt-4 grid grid-cols-1 gap-3">
+                <label class="text-xs">Full name
+                    <input required name="fullname" class="mt-1 w-full border px-3 py-2 rounded"
+                        placeholder="Your name" />
+                </label>
+                <label class="text-xs">Phone
+                    <input required name="phone" class="mt-1 w-full border px-3 py-2 rounded"
+                        placeholder="Phone number" />
+                </label>
+                <div class="grid grid-cols-2 gap-2">
+                    <label class="text-xs">Guests
+                        <select name="guests" class="mt-1 w-full border px-3 py-2 rounded">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5+</option>
+                        </select>
+                    </label>
+                    <label class="text-xs">Date & Time
+                        <input type="datetime-local" name="datetime" class="mt-1 w-full border px-3 py-2 rounded" />
+                    </label>
+                </div>
+
+                <div class="flex items-center justify-between gap-3 mt-2">
+                    <button type="submit" class="bg-primary text-secondary px-4 py-2 rounded font-medium">Request
+                        reservation</button>
+                    <button type="button" id="cancelModal" class="text-sm text-neutral-500">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         // Mobile nav toggle
         const navToggle = document.getElementById('navToggle');
+        const mobileNav = document.getElementById('mobileNav');
         navToggle?.addEventListener('click', () => {
-            const nav = document.querySelector('header nav');
-            nav?.classList.toggle('hidden');
+            const open = mobileNav.classList.toggle('hidden');
+            navToggle.setAttribute('aria-expanded', String(!open));
+            // rotate hamburger for simple animation
+            document.getElementById('hamburger')?.classList.toggle('rotate-90');
+        });
+
+        // Reservation modal logic
+        const modalBackdrop = document.getElementById('modalBackdrop');
+        const openButtons = [document.getElementById('bookBtn'), document.getElementById('heroBook'), document.getElementById('mobileBookBtn')];
+        const closeModal = document.getElementById('closeModal');
+        const cancelModal = document.getElementById('cancelModal');
+        const reserveForm = document.getElementById('reserveForm');
+
+        function openModal() {
+            modalBackdrop.classList.remove('hidden');
+            modalBackdrop.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            // focus first input for accessibility
+            setTimeout(() => modalBackdrop.querySelector('input[name="fullname"]')?.focus(), 80);
+        }
+
+        function hideModal() {
+            modalBackdrop.classList.remove('flex');
+            modalBackdrop.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        openButtons.forEach(btn => { if (btn) btn.addEventListener('click', openModal); });
+        closeModal?.addEventListener('click', hideModal);
+        cancelModal?.addEventListener('click', hideModal);
+        modalBackdrop?.addEventListener('click', (e) => { if (e.target === modalBackdrop) hideModal(); });
+
+        reserveForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // This is a demo handler. Connect to backend / API as needed.
+            alert('Reservation requested! We will contact you soon to confirm.');
+            hideModal();
+            reserveForm.reset();
+        });
+
+        // Testimonial slider (simple)
+        (function () {
+            const slides = Array.from(document.querySelectorAll('#testimonialSlider .slide'));
+            const prevBtn = document.getElementById('prevTesti');
+            const nextBtn = document.getElementById('nextTesti');
+            let idx = 0;
+            let timer = null;
+
+            function show(i) {
+                slides.forEach((s, j) => s.classList.toggle('active', j === i));
+            }
+
+            function next() { idx = (idx + 1) % slides.length; show(idx); }
+            function prev() { idx = (idx - 1 + slides.length) % slides.length; show(idx); }
+
+            nextBtn?.addEventListener('click', () => { next(); resetAuto(); });
+            prevBtn?.addEventListener('click', () => { prev(); resetAuto(); });
+
+            function startAuto() { timer = setInterval(next, 6000); }
+            function resetAuto() { clearInterval(timer); startAuto(); }
+
+            if (slides.length > 0) {
+                show(0);
+                startAuto();
+            }
+        })();
+
+        // Tiny enhancement: smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                const href = a.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const el = document.querySelector(href);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
         });
     </script>
 </body>
