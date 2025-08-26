@@ -28,6 +28,10 @@
         }
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome (jsDelivr CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+        crossorigin="anonymous" />
+
 
     <!-- Poppins from Google -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
@@ -601,48 +605,89 @@
         </div>
     </section>
 
-    <!-- STATS STRIP -->
+    <!-- STATS STRIP — redesigned (Font Awesome icons) -->
     <section id="highlights-stats" class="max-w-7xl mx-auto px-6 py-12">
         <div class="bg-white rounded-2xl shadow-soft-lg border border-white/60 p-8">
-            <div class="text-center mb-10">
-                <h3 class="text-sm text-primary font-semibold tracking-widest">OUR IMPACT</h3>
-                <h2 class="mt-2 text-2xl md:text-3xl font-rock">Numbers that tell our story</h2>
-                <p class="mt-2 text-sm text-neutral-500 max-w-2xl mx-auto">From signature dishes to happy customers — a
-                    quick
-                    snapshot.</p>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8">
+                <div class="text-center md:text-left">
+                    <h3 class="text-sm text-primary font-semibold tracking-widest">OUR IMPACT</h3>
+                    <h2 class="mt-2 text-2xl md:text-3xl font-rock">Numbers that tell our story</h2>
+                    <p class="mt-2 text-sm text-neutral-500 max-w-2xl">From signature dishes to happy customers — a
+                        quick snapshot.</p>
+                </div>
+
+                <div class="text-center md:text-right">
+                    <a href="/menu"
+                        class="inline-flex items-center gap-2 bg-primary text-secondary px-4 py-2 rounded-full shadow font-medium hover:scale-[1.02] transition-transform">
+                        View Full Menu
+                    </a>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 items-center">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6" role="list"
+                aria-label="Restaurant statistics">
                 <!-- Dishes -->
-                <div class="relative overflow-visible rounded-lg p-6 flex items-center justify-center">
-                    <div
-                        class="absolute text-[7.5rem] font-lemon font-bold leading-[0.85] text-primary/10 pointer-events-none select-none -translate-y-[8%]">
-                        9</div>
-                    <div class="relative z-10 px-6 py-2 bg-white rounded shadow-sm font-semibold">Dishes</div>
+                <div class="stat-card relative rounded-2xl p-5 flex flex-col items-center text-center bg-white/40 backdrop-blur-sm border border-white/20 shadow transition-all duration-700 opacity-0 translate-y-6"
+                    role="listitem" aria-labelledby="stat-dishes">
+                    <div class="w-14 h-14 rounded-full grid place-items-center bg-gradient-to-br from-primary to-[#f59e42] text-secondary font-bold mb-3 shadow-sm"
+                        aria-hidden="true">
+                        <i class="fa-solid fa-utensils fa-lg"></i>
+                    </div>
+
+                    <div class="text-4xl md:text-5xl font-lemon font-bold leading-tight">
+                        <span class="stat-number" data-target="9" aria-live="polite">0</span>
+                    </div>
+
+                    <div id="stat-dishes" class="mt-2 text-sm font-medium text-neutral-800">Dishes</div>
+                    <div class="mt-2 text-xs text-neutral-500">Signature mains & favourites</div>
                 </div>
 
                 <!-- Platters -->
-                <div class="relative overflow-visible rounded-lg p-6 flex items-center justify-center">
-                    <div
-                        class="absolute text-[5.5rem] md:text-[7.5rem] font-lemon font-bold leading-[0.85] text-primary/10 pointer-events-none select-none -translate-y-[8%]">
-                        3</div>
-                    <div class="relative z-10 px-6 py-2 bg-white rounded shadow-sm font-semibold">Platters</div>
+                <div class="stat-card relative rounded-2xl p-5 flex flex-col items-center text-center bg-white/40 backdrop-blur-sm border border-white/20 shadow transition-all duration-800 opacity-0 translate-y-6"
+                    role="listitem" aria-labelledby="stat-platters">
+                    <div class="w-14 h-14 rounded-full grid place-items-center bg-gradient-to-br from-[#8ec6c6] to-[#d84b2f] text-white font-bold mb-3 shadow-sm"
+                        aria-hidden="true">
+                        <i class="fa-solid fa-bowl-food fa-lg"></i>
+                    </div>
+
+                    <div class="text-4xl md:text-5xl font-lemon font-bold leading-tight">
+                        <span class="stat-number" data-target="3" aria-live="polite">0</span>
+                    </div>
+
+                    <div id="stat-platters" class="mt-2 text-sm font-medium text-neutral-800">Platters</div>
+                    <div class="mt-2 text-xs text-neutral-500">Perfect for sharing</div>
                 </div>
 
                 <!-- Desserts -->
-                <div class="relative overflow-visible rounded-lg p-6 flex items-center justify-center">
-                    <div
-                        class="absolute text-[5.5rem] md:text-[7.5rem] font-lemon font-bold leading-[0.85] text-primary/10 pointer-events-none select-none -translate-y-[8%]">
-                        3</div>
-                    <div class="relative z-10 px-6 py-2 bg-white rounded shadow-sm font-semibold">Desserts</div>
+                <div class="stat-card relative rounded-2xl p-5 flex flex-col items-center text-center bg-white/40 backdrop-blur-sm border border-white/20 shadow transition-all duration-900 opacity-0 translate-y-6"
+                    role="listitem" aria-labelledby="stat-desserts">
+                    <div class="w-14 h-14 rounded-full grid place-items-center bg-gradient-to-br from-[#f05323] to-[#d84b2f] text-white font-bold mb-3 shadow-sm"
+                        aria-hidden="true">
+                        <i class="fa-solid fa-ice-cream fa-lg"></i>
+                    </div>
+
+                    <div class="text-4xl md:text-5xl font-lemon font-bold leading-tight">
+                        <span class="stat-number" data-target="3" aria-live="polite">0</span>
+                    </div>
+
+                    <div id="stat-desserts" class="mt-2 text-sm font-medium text-neutral-800">Desserts</div>
+                    <div class="mt-2 text-xs text-neutral-500">Sweet endings</div>
                 </div>
 
                 <!-- Drinks -->
-                <div class="relative overflow-visible rounded-lg p-6 flex items-center justify-center">
-                    <div
-                        class="absolute text-[7.5rem] font-lemon font-bold leading-[0.85] text-primary/10 pointer-events-none select-none -translate-y-[8%]">
-                        17</div>
-                    <div class="relative z-10 px-6 py-2 bg-white rounded shadow-sm font-semibold">Drinks</div>
+                <div class="stat-card relative rounded-2xl p-5 flex flex-col items-center text-center bg-white/40 backdrop-blur-sm border border-white/20 shadow transition-all duration-1000 opacity-0 translate-y-6"
+                    role="listitem" aria-labelledby="stat-drinks">
+                    <div class="w-14 h-14 rounded-full grid place-items-center bg-gradient-to-br from-primary to-[#f59e42] text-secondary font-bold mb-3 shadow-sm"
+                        aria-hidden="true">
+                        <i class="fa-solid fa-mug-saucer fa-lg"></i>
+                    </div>
+
+                    <div class="text-4xl md:text-5xl font-lemon font-bold leading-tight">
+                        <span class="stat-number" data-target="17" aria-live="polite">0</span>
+                    </div>
+
+                    <div id="stat-drinks" class="mt-2 text-sm font-medium text-neutral-800">Drinks</div>
+                    <div class="mt-2 text-xs text-neutral-500">Hot & cold beverages</div>
                 </div>
             </div>
         </div>

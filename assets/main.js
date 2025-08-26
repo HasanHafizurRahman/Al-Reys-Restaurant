@@ -172,43 +172,64 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 // Stats strip — count-up + reveal when visible
+// Stats strip — count-up + reveal when visible (updated to match redesigned markup)
 (function () {
-  const statSection = document.getElementById('highlights-stats');
-  if (!statSection) return;
+    const statSection = document.getElementById('highlights-stats');
+    if (!statSection) return;
 
-  const statEls = Array.from(statSection.querySelectorAll('.stat-number'));
-  const duration = 1400; // ms
+    const statEls = Array.from(statSection.querySelectorAll('.stat-number'));
+    const statCards = Array.from(statSection.querySelectorAll('.stat-card'));
+    const duration = 1400; // ms
 
-  function animateCount(el, target) {
-    const start = 0;
-    const end = Number(target);
-    if (isNaN(end)) return;
-    const startTime = performance.now();
+    function animateCount(el, target) {
+        const start = 0;
+        const end = Number(target);
+        if (isNaN(end)) return;
+        const startTime = performance.now();
 
-    function step(now) {
-      const t = Math.min((now - startTime) / duration, 1);
-      // easeOutCubic
-      const eased = 1 - Math.pow(1 - t, 3);
-      const current = Math.floor(start + (end - start) * eased);
-      el.textContent = String(current);
-      if (t < 1) requestAnimationFrame(step);
-      else el.textContent = String(end);
+        function step(now) {
+            const t = Math.min((now - startTime) / duration, 1);
+            // easeOutCubic
+            const eased = 1 - Math.pow(1 - t, 3);
+            const current = Math.floor(start + (end - start) * eased);
+            el.textContent = String(current);
+            if (t < 1) requestAnimationFrame(step);
+            else el.textContent = String(end);
+        }
+        requestAnimationFrame(step);
     }
-    requestAnimationFrame(step);
-  }
 
-  const obs = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        statSection.querySelectorAll('.stat-card').forEach(c => c.classList.add('revealed'));
-        statEls.forEach(el => {
-          const target = el.dataset.target || el.textContent || '0';
-          animateCount(el, target);
+    const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // reveal cards with staggered timing
+                statCards.forEach((c, i) => {
+                    // use small timeout to create a staggered entrance
+                    setTimeout(() => {
+                        c.classList.remove('opacity-0', 'translate-y-6');
+                        c.classList.add('opacity-100', 'translate-y-0');
+                    }, i * 120);
+                });
+
+                // animate numbers (run once)
+                statEls.forEach((el, i) => {
+                    const target = el.dataset.target || el.textContent || '0';
+                    setTimeout(() => animateCount(el, target), i * 120);
+                });
+
+                observer.disconnect(); // run once
+            }
         });
-        observer.disconnect(); // run once
-      }
-    });
-  }, { threshold: 0.25 });
+    }, { threshold: 0.25 });
 
-  obs.observe(statSection);
+    // ensure initial utility classes exist (so toggle works)
+    statCards.forEach(c => {
+        // if card already visible do nothing
+        if (!c.classList.contains('opacity-0') && !c.classList.contains('translate-y-6')) {
+            c.classList.add('opacity-0', 'translate-y-6');
+        }
+    });
+
+    obs.observe(statSection);
 })();
+
