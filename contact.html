@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contact — Al Reys Somali Restaurant</title>
+
+    <script>
+        tailwind = {
+            config: {
+                theme: {
+                    extend: {
+                        colors: { primary: '#CEB02E', secondary: '#151515' },
+                        fontFamily: {
+                            lemon: ['"Lemon Milk"', 'sans-serif'],
+                            rockwell: ['"Rockwell"', 'serif'],
+                            poppins: ['Poppins', 'sans-serif']
+                        },
+                        boxShadow: {
+                            'soft-lg': '0 18px 40px rgba(20,20,30,0.08)',
+                            'soft-md': '0 10px 28px rgba(20,20,30,0.06)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+        crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Fixes for mobile spacing and mobile menu positioning */
+        header {
+            /* ensure absolute mobile menu positions itself relative to header */
+        }
+
+        /* Reduce large gaps on small screens */
+        @media (max-width: 1024px) {
+            .main-grid {
+                gap: 1rem;
+            }
+
+            .contact-aside .card {
+                margin-bottom: 0;
+            }
+
+            /* If your header uses sticky with top offset, ensure mobile menu sits right below header */
+            #mobileNav {
+                top: calc(100% + 0.5rem);
+                margin-top: 0 !important;
+            }
+        }
+
+        /* Small polish: make embedded map responsive and remove unexpected white gaps */
+        iframe#gmap,
+        iframe#gmaps {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-neutral-700 font-poppins antialiased">
+
+    <!-- TOP BAR -->
+    <div class="hidden md:block bg-[rgba(21,21,21,0.02)] border-b">
+        <div class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between text-xs text-neutral-500">
+            <div>Open daily • Parking available • Halal Certified</div>
+            <div class="flex items-center gap-4">
+                <a href="tel:07843784145" class="hover:text-primary">07843 784145</a>
+                <a href="mailto:info@alreys.co.uk" class="hover:text-primary">info@alreys.co.uk</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <header class="w-full sticky top-6 z-50 relative"> <!-- added relative -->
+        <div class="max-w-[1400px] mx-auto px-6">
+            <!-- rounded white bar -->
+            <div class="bg-white rounded-2xl shadow-soft-lg border border-white/60 flex items-center justify-between gap-6 py-3 px-5 md:px-6"
+                role="navigation" aria-label="Main navigation">
+
+                <!-- left: logo -->
+                <a href="/" class="flex items-center gap-3">
+                    <img src="/assets/logo.png" alt="Al Reys logo" class="h-10" />
+                    <span class="text-sm font-medium hidden sm:inline">Al Reys</span>
+                </a>
+
+                <!-- center / right: links (desktop) -->
+                <nav id="main-nav" class="hidden md:flex items-center gap-8 text-sm ml-auto">
+                    <a href="/"
+                        class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">Home</a>
+                    <a href="/about.html"
+                        class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">About</a>
+                    <a href="/menu.html"
+                        class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">Menu</a>
+                    <a href="/contact.html"
+                        class="relative nav-item nav-pill focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded-full px-3 py-2 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">Contact</a>
+                </nav>
+
+                <!-- mobile controls -->
+                <div class="flex items-center gap-3">
+                    <button id="navToggle" aria-expanded="false" aria-controls="mobileNav"
+                        class="md:hidden p-2 rounded-md border focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                        aria-label="Open menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="hamburger" class="h-5 w-5 transition-transform"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- mobile menu: positioned right under header on small screens -->
+                <div id="mobileNav" class="md:hidden hidden absolute left-4 right-4 top-full mt-2 px-6">
+                    <!-- replaced mt-80 with top-full mt-2 -->
+                    <div class="bg-white rounded-xl border shadow p-4 flex flex-col gap-2">
+                        <a href="/" class="py-2">Home</a>
+                        <a href="/about.html" class="py-2">About</a>
+                        <a href="/menu.html" class="py-2">Menu</a>
+                        <a href="/contact.html" class="py-2">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="relative bg-[url('/assets/hero.jpg')] bg-cover bg-center min-h-[36vh] flex items-center">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/20"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-12 text-white">
+            <h1 class="text-4xl md:text-5xl font-lemon">Get in touch</h1>
+            <p class="mt-3 text-neutral-200 max-w-2xl">Questions, bookings or private events — we’d love to hear from
+                you. Use the contact details below or open the map to get directions.</p>
+        </div>
+    </section>
+
+    <!-- CONTACT CONTENT (NO FORM) -->
+    <main class="max-w-7xl mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start main-grid"> <!-- added main-grid class -->
+            <!-- Contact info -->
+            <aside class="lg:col-span-1 space-y-6 contact-aside"> <!-- added contact-aside class -->
+                <div class="bg-white rounded-2xl p-6 shadow-soft-md border border-white/60 card">
+                    <h4 class="font-medium">Contact</h4>
+                    <p class="text-sm text-neutral-600 mt-3">329 Wellingborough Rd<br />Northampton NN1 4EW</p>
+
+                    <div class="mt-4">
+                        <p class="text-sm"><strong>Tel</strong><br />
+                            <a href="tel:07843784145" class="underline hover:text-primary">07843 784145</a><br />
+                            <a href="tel:01604218037" class="underline hover:text-primary">01604 218037</a>
+                        </p>
+
+                        <p class="text-sm mt-4"><strong>Email</strong><br />
+                            <a href="mailto:info@alreys.co.uk"
+                                class="underline hover:text-primary">info@alreys.co.uk</a>
+                        </p>
+
+                        <p class="text-sm mt-4"><strong>Opening Hours</strong><br />
+                            Mon - Sun 12:00 pm - 11:00 pm
+                        </p>
+                    </div>
+
+                    <div class="mt-6 flex items-center gap-3">
+                        <a href="https://www.instagram.com/alreyssomalirestaurant/" target="_blank" rel="noreferrer"
+                            class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/6 hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                            aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61578677582714" target="_blank"
+                            rel="noreferrer"
+                            class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/6 hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                            aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/foryou?lang=en" target="_blank" rel="noreferrer"
+                            class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/6 hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                            aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 shadow-soft-md border border-white/60 text-sm card">
+                    <h4 class="font-medium">Quick facts</h4>
+                    <ul class="mt-3 space-y-2 text-neutral-600">
+                        <li>Halal certified</li>
+                        <li>On-site parking</li>
+                        <li>Family friendly</li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-primary to-[#f59e42] rounded-2xl p-4 text-white text-center shadow-soft-md card">
+                    <h5 class="font-medium">Book a Table</h5>
+                    <p class="text-sm mt-2">Reserve a table for lunch, dinner or special occasions.</p>
+                    <div class="mt-3 grid grid-cols-1 gap-2">
+                        <a href="tel:07843784145"
+                            class="inline-flex items-center justify-center px-4 py-2 bg-white text-secondary rounded-full font-semibold">Call
+                            us</a>
+                        <a href="mailto:info@alreys.co.uk"
+                            class="inline-flex items-center justify-center px-4 py-2 bg-white text-secondary rounded-full font-semibold">Email</a>
+                        <a href="https://wa.me/447843784145" target="_blank" rel="noreferrer"
+                            class="inline-flex items-center justify-center px-4 py-2 bg-white text-secondary rounded-full font-semibold">WhatsApp</a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Map + directions -->
+            <div class="lg:col-span-2 space-y-6">
+                <section class="bg-white rounded-2xl overflow-hidden border border-white/60 shadow-soft-md">
+                    <div class="p-4">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h4 class="font-medium">Find us on the map</h4>
+                                <p class="text-sm text-neutral-600 mt-1">329 Wellingborough Rd, Northampton NN1 4EW</p>
+                            </div>
+
+                            <div class="text-sm text-neutral-500">
+                                <a href="https://www.google.com/maps?q=329+Wellingborough+Rd+Northampton+NN1+4EW"
+                                    target="_blank" rel="noreferrer" class="underline hover:text-primary">Open in Google
+                                    Maps</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Google Maps Embed (lazy load) -->
+                    <div class="w-full h-72 md:h-96">
+                        <iframe id="gmaps" loading="lazy" class="w-full h-full border-0"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2402.138196841655!2d-0.8944327841572308!3d52.23371797975406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4877a154a5e0c8f1%3A0x21d1d2f2c9b8b9a6!2s329%20Wellingborough%20Rd%2C%20Northampton%20NN1%204EW!5e0!3m2!1sen!2suk!4v1690000000000"
+                            allowfullscreen aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+
+                    <div class="p-4 border-t border-white/10 bg-white/5 text-sm text-neutral-600">
+                        <strong>Directions:</strong> From Northampton town centre follow the A5199 toward Wellingborough
+                        Rd. The restaurant is located on the left-hand side. Parking is available on-site.
+                    </div>
+                </section>
+
+                <section class="bg-white rounded-2xl p-6 shadow-soft-lg border border-white/60">
+                    <h3 class="text-lg font-medium">Questions or events?</h3>
+                    <p class="mt-2 text-sm text-neutral-600">For private hire, catering enquiries or larger group
+                        bookings please call us on <a href="tel:07843784145" class="underline hover:text-primary">07843
+                            784145</a> or email <a href="mailto:info@alreys.co.uk"
+                            class="underline hover:text-primary">info@alreys.co.uk</a>. We’re happy to help plan menus
+                        and accommodate dietary requirements.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER (icons for socials) -->
+    <footer id="contact" class="py-10 bg-[#151515] text-white">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+                <img src="/assets/logo.png" alt="logo" class="h-10 mb-4" />
+                <p class="text-xs text-white/80">Copyright © 2025 Al Reys. Design & Developed by You.</p>
+            </div>
+
+            <div>
+                <h4 class="font-medium text-white">Opening Hours</h4>
+                <p class="text-xs mt-2 text-white/70">Mon - Sun 12:00 pm - 11:00 pm</p>
+            </div>
+
+            <div>
+                <h4 class="font-medium text-white">Contact</h4>
+                <p class="text-xs mt-2 text-white/70">329 Wellingborough Rd, Northampton NN1 4EW<br />Tel: <a
+                        href="tel:07843784145" class="underline hover:text-primary">07843 784145</a> / <a
+                        href="tel:01604218037" class="underline hover:text-primary">01604 218037</a><br />E-mail: <a
+                        href="mailto:info@alreys.co.uk" class="underline hover:text-primary">info@alreys.co.uk</a>
+                </p>
+
+                <div class="mt-4 flex items-center gap-3">
+                    <a href="https://www.instagram.com/alreyssomalirestaurant/" target="_blank" rel="noreferrer"
+                        class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/6 hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                        aria-label="Al Reys on Instagram">
+                        <i class="fa-brands fa-instagram text-lg" aria-hidden="true"></i>
+                        <span class="sr-only">Instagram</span>
+                    </a>
+
+                    <a href="https://www.facebook.com/profile.php?id=61578677582714" target="_blank" rel="noreferrer"
+                        class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/6 hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                        aria-label="Al Reys on Facebook">
+                        <i class="fa-brands fa-facebook-f text-lg" aria-hidden="true"></i>
+                        <span class="sr-only">Facebook</span>
+                    </a>
+
+                    <a href="https://www.tiktok.com/foryou?lang=en" target="_blank" rel="noreferrer"
+                        class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/6 hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                        aria-label="Al Reys on TikTok">
+                        <i class="fa-brands fa-tiktok text-lg" aria-hidden="true"></i>
+                        <span class="sr-only">TikTok</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        document.getElementById('navToggle')?.addEventListener('click', function () {
+            const mobile = document.getElementById('mobileNav');
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', (!expanded).toString());
+            mobile.classList.toggle('hidden');
+        });
+    </script>
+
+    <script src="/assets/main.js"></script>
+</body>
+
+</html>
