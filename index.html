@@ -32,365 +32,9 @@
     <!-- Poppins from Google -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
         rel="stylesheet">
-
-    <style>
-        /* Local custom fonts (kept as your originals) */
-        @font-face {
-            font-family: 'Lemon Milk';
-            src: url('/assets/fonts/LemonMilk-Regular.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: 'Rockwell';
-            src: url('/assets/fonts/Rockwell-Regular.woff2') format('woff2');
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        :root {
-            --primary: #CEB02E;
-            --secondary: #151515;
-            --testi-accent: #d84b2f;
-            --testi-teal: #8ec6c6;
-            --glass: rgba(255, 255, 255, 0.85);
-            --muted: #6b7280;
-        }
-
-        /* Ensure consistent section background */
-        section {
-            background-color: #ffffff;
-        }
-
-        /* small utility classes */
-        .font-lemon {
-            font-family: 'Lemon Milk', Poppins, sans-serif;
-        }
-
-        .font-rock {
-            font-family: 'Rockwell', 'Times New Roman', serif;
-        }
-
-        .font-pop {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .hero-bg {
-            background-position: center;
-            background-size: cover;
-        }
-
-        /* glass card */
-        .glass-card {
-            background: var(--glass);
-            box-shadow: 0 18px 40px rgba(20, 20, 30, 0.08);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-        }
-
-        .testi-avatar {
-            width: 260px;
-            height: 260px;
-            border-radius: 9999px;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
-            object-fit: cover;
-            border: 10px solid rgba(255, 255, 255, 0.95);
-        }
-
-        .testi-quote-bubble {
-            width: 110px;
-            height: 110px;
-            border-radius: 9999px;
-            display: grid;
-            place-items: center;
-            background: var(--testi-accent);
-            color: white;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-            transform: translateY(30%);
-            overflow: visible;
-        }
-
-        /* large decorative quote */
-        .testi-big-quote {
-            position: absolute;
-            right: 6%;
-            top: 22%;
-            font-size: 160px;
-            line-height: .8;
-            pointer-events: none;
-            user-select: none;
-            font-family: serif;
-            opacity: .08;
-        }
-
-        /* subtle float */
-        @keyframes floatUp {
-            from {
-                transform: translateY(12px);
-                opacity: 0
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1
-            }
-        }
-
-        .animate-float {
-            animation: floatUp .6s ease both;
-        }
-
-        /* header */
-        .nav-item {
-            position: relative;
-            padding: 8px 6px;
-            color: #0f1724;
-            /* neutral dark */
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
-            transition: color .18s ease;
-        }
-
-        .nav-item::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: -8px;
-            height: 6px;
-            width: 0;
-            border-radius: 999px;
-            background: var(--primary);
-            transition: width .22s cubic-bezier(.2, .9, .2, 1), opacity .22s;
-            opacity: 0;
-        }
-
-        /* hover shows a short underline */
-        .nav-item:hover::after,
-        .nav-item:focus::after {
-            width: 40px;
-            opacity: 1;
-        }
-
-        /* the 'pill' (Contact) — slightly bigger and visible as active */
-        .nav-pill {
-            padding-left: 10px;
-            padding-right: 10px;
-            border-radius: 999px;
-        }
-
-        .nav-pill::after {
-            /* wider, visible underline for the "Contact" pill */
-            bottom: -10px;
-            height: 6px;
-            width: 0;
-        }
-
-        /* active state (applied by JS below) */
-        .nav-item.active::after {
-            width: 56px;
-            opacity: 1;
-        }
-
-        /* support for keyboard focus styling */
-        .nav-focus:focus {
-            outline: 3px solid rgba(206, 176, 46, 0.12);
-            outline-offset: 4px;
-            border-radius: .5rem;
-        }
-
-        /* small placement fix for mobile absolute menu */
-        #mobileNav {
-            z-index: 60;
-            left: 1rem;
-            right: 1rem;
-        }
-
-        /* testimonial slider small tweaks */
-        .slide {
-            display: none;
-            opacity: 0;
-            transform: translateY(8px);
-            transition: opacity .45s ease, transform .45s ease;
-        }
-
-        .slide.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* pagination dots */
-        .testi-dots {
-            display: inline-flex;
-            gap: 8px;
-        }
-
-        .testi-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            cursor: pointer;
-        }
-
-        .testi-dot.active {
-            background: var(--primary);
-        }
-
-        /* reservation modal */
-        .modal-backdrop {
-            background: rgba(6, 6, 6, 0.45);
-        }
-
-        .visually-hidden {
-            position: absolute !important;
-            height: 1px;
-            width: 1px;
-            overflow: hidden;
-            clip: rect(1px, 1px, 1px, 1px);
-            white-space: nowrap;
-            clip-path: inset(50%);
-            border: 0;
-            padding: 0;
-            margin: -1px;
-        }
-
-        /* improved focus states for accessibility */
-        a:focus,
-        button:focus,
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: 3px solid rgba(206, 176, 46, 0.15);
-            outline-offset: 2px;
-            border-radius: 6px;
-        }
-
-        /* responsive avatar reduce */
-        @media (max-width: 767px) {
-            .testi-avatar {
-                width: 180px;
-                height: 180px;
-                border-width: 8px;
-            }
-
-            .testi-quote-bubble {
-                width: 80px;
-                height: 80px;
-            }
-
-            .testi-big-quote {
-                font-size: 90px;
-                right: 6%;
-                top: 10%;
-            }
-        }
-
-        /* Stats strip custom styles */
-        .stat-card {
-            background: transparent;
-            /* parent is white card already */
-        }
-
-        .stat-number {
-            position: absolute;
-            font-family: 'Lemon Milk', Poppins, sans-serif;
-            font-weight: 700;
-            font-size: 7.5rem;
-            /* large outlined number */
-            line-height: 0.85;
-            -webkit-text-stroke: 3px #d84b2f;
-            /* red outline like your testimonial accent */
-            color: transparent;
-            opacity: 0.10;
-            pointer-events: none;
-            user-select: none;
-            transform: translateY(-8%);
-            transition: transform .45s cubic-bezier(.2, .9, .2, 1), opacity .45s;
-            text-align: center;
-        }
-
-        /* Pill label (keeps readable, sits above number) */
-        .stat-pill {
-            position: relative;
-            z-index: 2;
-            padding-left: 1.2rem;
-            padding-right: 1.2rem;
-            padding-top: .45rem;
-            padding-bottom: .45rem;
-            box-shadow: 0 8px 20px rgba(10, 10, 10, 0.06);
-        }
-
-        /* reveal animation when visible */
-        .stat-card.revealed .stat-number {
-            opacity: 0.12;
-            transform: translateY(-12%);
-        }
-
-        /* hover micro-lift */
-        .stat-card:hover .stat-pill,
-        .stat-card:focus-within .stat-pill {
-            transform: translateY(-6px);
-            transition: transform .22s ease;
-        }
-
-        /* responsive sizing */
-        @media (max-width: 1024px) {
-            .stat-number {
-                font-size: 5.5rem;
-                -webkit-text-stroke: 2.5px #d84b2f;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .stat-number {
-                font-size: 4rem;
-                -webkit-text-stroke: 2px #d84b2f;
-            }
-
-            .stat-pill {
-                padding-left: .9rem;
-                padding-right: .9rem;
-            }
-        }
-
-        /* Mobile modal close icon styles */
-        .modal-close-mobile {
-            display: none;
-        }
-
-        @media (max-width: 767px) {
-            .modal-close-mobile {
-                display: block;
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                width: 40px;
-                height: 40px;
-                border-radius: 9999px;
-                background: rgba(255, 255, 255, 0.95);
-                border: 1px solid rgba(0, 0, 0, 0.06);
-                display: grid;
-                place-items: center;
-                box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-                z-index: 60;
-            }
-
-            /* ensure dialog has a little padding-top so the button doesn't overlap text */
-            [role="dialog"] {
-                padding-top: 48px;
-            }
-        }
-    </style>
 </head>
 
-<body class="bg-white text-neutral-700 font-pop antialiased">
+<body class="bg-white text-neutral-700 font-poppins antialiased">
 
     <!-- TOP BAR -->
     <div class="hidden md:block bg-[rgba(21,21,21,0.02)] border-b">
@@ -417,19 +61,48 @@
                 </a>
 
                 <!-- center / right: links (desktop) -->
-                <!-- ADJUSTMENT: add ml-auto so nav sits to the right on desktop -->
                 <nav id="main-nav" class="hidden md:flex items-center gap-8 text-sm ml-auto">
-                    <a href="#home" class="nav-item nav-focus" data-target="#home">Home</a>
-                    <a href="#about" class="nav-item nav-focus" data-target="#about">About</a>
-                    <a href="#menu" class="nav-item nav-focus" data-target="#menu">Menu</a>
-                    <a href="#gallery" class="nav-item nav-focus" data-target="#gallery">Gallery</a>
-                    <a href="#contact" class="nav-item nav-focus nav-pill" data-target="#contact">Contact</a>
+                    <a href="#home"
+                        class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">
+                        Home
+                        <span
+                            class="block absolute left-1/2 -bottom-2 h-1 w-0 rounded-full bg-primary transition-all duration-200 transform -translate-x-1/2 group-hover:w-10"></span>
+                    </a>
+
+                    <a href="#about"
+                        class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">
+                        About
+                        <span
+                            class="block absolute left-1/2 -bottom-2 h-1 w-0 rounded-full bg-primary transition-all duration-200 transform -translate-x-1/2 group-hover:w-10"></span>
+                    </a>
+
+                    <a href="#menu"
+                        class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">
+                        Menu
+                        <span
+                            class="block absolute left-1/2 -bottom-2 h-1 w-0 rounded-full bg-primary transition-all duration-200 transform -translate-x-1/2 group-hover:w-10"></span>
+                    </a>
+
+                    <a href="#gallery"
+                        class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">
+                        Gallery
+                        <span
+                            class="block absolute left-1/2 -bottom-2 h-1 w-0 rounded-full bg-primary transition-all duration-200 transform -translate-x-1/2 group-hover:w-10"></span>
+                    </a>
+
+                    <a href="#contact"
+                        class="relative nav-item nav-pill focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded-full px-3 py-2 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">
+                        Contact
+                        <span
+                            class="block absolute left-1/2 -bottom-2 h-1 w-0 rounded-full bg-primary transition-all duration-200 transform -translate-x-1/2 group-hover:w-14"></span>
+                    </a>
                 </nav>
 
                 <!-- mobile controls -->
                 <div class="flex items-center gap-3">
                     <button id="navToggle" aria-expanded="false" aria-controls="mobileNav"
-                        class="md:hidden p-2 rounded-md border nav-focus" aria-label="Open menu">
+                        class="md:hidden p-2 rounded-md border focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                        aria-label="Open menu">
                         <svg xmlns="http://www.w3.org/2000/svg" id="hamburger" class="h-5 w-5 transition-transform"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -438,8 +111,8 @@
                     </button>
                 </div>
 
-                <!-- mobile menu (keeps your previous mobile markup logic) -->
-                <div id="mobileNav" class="md:hidden hidden absolute left-0 right-0 mt-80 px-6">
+                <!-- mobile menu -->
+                <div id="mobileNav" class="md:hidden hidden absolute left-4 right-4 mt-80 px-6">
                     <div class="bg-white rounded-xl border shadow p-4 flex flex-col gap-2">
                         <a href="#home" class="py-2">Home</a>
                         <a href="#about" class="py-2">About</a>
@@ -453,16 +126,16 @@
     </header>
 
     <!-- HERO -->
-    <section id="home" class="hero-bg relative min-h-[72vh] md:min-h-[80vh]"
+    <section id="home" class="relative min-h-[72vh] md:min-h-[80vh] bg-center bg-cover"
         style="background-image:url('/assets/hero.jpg')">
         <div class="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.55)] to-[rgba(0,0,0,0.35)]"></div>
 
         <div
             class="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <!-- Left: headline -->
-            <div class="text-white animate-float">
-                <h1 class="text-3xl md:text-5xl lg:text-6xl font-lemon hero-title leading-tight">Welcome to <span
-                        class="block">Al Reys — Somali Restaurant</span></h1>
+            <div class="text-white">
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-lemon leading-tight">Welcome to <span class="block">Al
+                        Reys — Somali Restaurant</span></h1>
                 <p class="mt-4 max-w-xl text-neutral-200">Authentic Somali & Mediterranean flavours, served with warmth.
                     Fresh ingredients, family recipes, and a welcoming atmosphere.</p>
 
@@ -487,13 +160,14 @@
 
             <!-- Right: feature card -->
             <div class="relative">
-                <div class="glass-card p-6 rounded-2xl shadow-soft-lg overflow-hidden border border-white/40">
+                <div
+                    class="bg-white/85 shadow-soft-lg backdrop-blur-sm rounded-2xl border border-white/40 p-6 overflow-hidden">
                     <div class="grid grid-cols-3 gap-4 items-center">
                         <img src="/assets/hero-dish.jpg" alt="Signature dish"
                             class="col-span-2 w-full h-36 object-cover rounded-lg shadow-sm" />
                         <div class="space-y-2">
                             <div class="text-xs text-neutral-400">Signature</div>
-                            <h4 class="font-medium">Hilib (Lamb Shank)</h4>
+                            <h4 class="font-medium text-neutral-900">Hilib (Lamb Shank)</h4>
                             <p class="text-xs text-neutral-500">House special with aromatic sauce</p>
 
                             <div class="mt-3 flex items-center gap-2">
@@ -505,23 +179,25 @@
                     </div>
                 </div>
 
-                <div class="absolute -top-4 right-3 bg-white/95 px-3 py-2 rounded-lg shadow-md text-xs font-medium">
-                    Popular Dish</div>
+                <div
+                    class="absolute -top-4 right-3 bg-white/95 px-3 py-2 rounded-lg shadow-md text-xs font-medium text-neutral-800">
+                    Popular
+                    Dish</div>
             </div>
         </div>
     </section>
 
     <!-- 3-COLUMN HIGHLIGHTS (transparent — no white bg around cards) -->
-    <section id="highlights" class="-mt-20 max-w-7xl mx-auto px-6 relative z-20" style="background: transparent;">
+    <section id="highlights" class="-mt-20 max-w-7xl mx-auto px-6 relative z-20">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             <!-- Card 1 -->
             <article
-                class="group relative rounded-2xl p-6 flex flex-col gap-4 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition-all duration-300 focus-within:ring-2 focus-within:ring-[rgba(206,176,46,0.12)] bg-white border border-white/6 backdrop-blur-sm"
+                class="group relative rounded-2xl p-6 flex flex-col gap-4 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition-all duration-300 focus-within:ring-4 focus-within:ring-[rgba(206,176,46,0.12)] bg-white border border-white/6 backdrop-blur-sm"
                 role="article" aria-label="Savour — Authentic dishes">
                 <div class="flex items-start gap-4">
                     <div
-                        class="flex-shrink-0 w-16 h-16 rounded-full grid place-items-center bg-gradient-to-br from-[var(--primary)] to-[#f59e42] text-[var(--secondary)] font-bold shadow">
+                        class="flex-shrink-0 w-16 h-16 rounded-full grid place-items-center bg-gradient-to-br from-[var(--tw-color-primary,#CEB02E)] to-[#f59e42] text-[var(--tw-color-secondary,#151515)] font-bold shadow">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -532,15 +208,16 @@
                     <div>
                         <h3 class="font-rock text-lg">Savour</h3>
                         <p class="mt-1 text-sm text-neutral-600">Authentic traditional Somali dishes crafted with fresh
-                            local produce — honest, bold flavours that feel like home.</p>
+                            local
+                            produce — honest, bold flavours that feel like home.</p>
                     </div>
                 </div>
 
                 <div class="mt-auto flex items-center justify-between">
                     <div class="text-xs text-neutral-400">Chef-curated</div>
                     <a href="/menu"
-                        class="inline-flex items-center gap-2 text-sm font-semibold nav-focus text-[var(--primary)]">
-                        View dishes
+                        class="inline-flex items-center gap-2 text-sm font-semibold focus:outline-none text-primary">View
+                        dishes
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -552,11 +229,11 @@
 
             <!-- Card 2 -->
             <article
-                class="group relative rounded-2xl p-6 flex flex-col gap-4 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition-all duration-300 focus-within:ring-2 focus-within:ring-[rgba(206,176,46,0.12)] bg-white border border-white/6 backdrop-blur-sm"
+                class="group relative rounded-2xl p-6 flex flex-col gap-4 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition-all duration-300 focus-within:ring-4 focus-within:ring-[rgba(206,176,46,0.12)] bg-white border border-white/6 backdrop-blur-sm"
                 role="article" aria-label="Somali — Regional classics">
                 <div class="flex items-start gap-4">
                     <div
-                        class="flex-shrink-0 w-16 h-16 rounded-full grid place-items-center bg-gradient-to-br from-[#8ec6c6] to-[var(--testi-accent)] text-white font-bold shadow">
+                        class="flex-shrink-0 w-16 h-16 rounded-full grid place-items-center bg-gradient-to-br from-[#8ec6c6] to-[#d84b2f] text-white font-bold shadow">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -567,14 +244,15 @@
                     <div>
                         <h3 class="font-rock text-lg">Somali</h3>
                         <p class="mt-1 text-sm text-neutral-600">Regional classics and family recipes — from hearty
-                            stews to fragrant rice, prepared with respect for tradition.</p>
+                            stews to
+                            fragrant rice, prepared with respect for tradition.</p>
                     </div>
                 </div>
 
                 <div class="mt-auto flex items-center justify-between">
                     <div class="text-xs text-neutral-400">Traditional</div>
                     <a href="/menu#somali"
-                        class="inline-flex items-center gap-2 text-sm font-semibold nav-focus text-[var(--primary)]">
+                        class="inline-flex items-center gap-2 text-sm font-semibold focus:outline-none text-primary">
                         Learn more
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -587,11 +265,11 @@
 
             <!-- Card 3 -->
             <article
-                class="group relative rounded-2xl p-6 flex flex-col gap-4 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition-all duration-300 focus-within:ring-2 focus-within:ring-[rgba(206,176,46,0.12)] bg-white border border-white/6 backdrop-blur-sm"
+                class="group relative rounded-2xl p-6 flex flex-col gap-4 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition-all duration-300 focus-within:ring-4 focus-within:ring-[rgba(206,176,46,0.12)] bg-white border border-white/6 backdrop-blur-sm"
                 role="article" aria-label="Flavour — spices & technique">
                 <div class="flex items-start gap-4">
                     <div
-                        class="flex-shrink-0 w-16 h-16 rounded-full grid place-items-center bg-gradient-to-br from-[#f05323] to-[var(--testi-accent)] text-white font-bold shadow">
+                        class="flex-shrink-0 w-16 h-16 rounded-full grid place-items-center bg-gradient-to-br from-[#f05323] to-[#d84b2f] text-white font-bold shadow">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -602,14 +280,15 @@
                     <div>
                         <h3 class="font-rock text-lg">Flavour</h3>
                         <p class="mt-1 text-sm text-neutral-600">Bold spice blends, tender meats and balanced sides — a
-                            mix of Somali warmth and Mediterranean freshness.</p>
+                            mix of
+                            Somali warmth and Mediterranean freshness.</p>
                     </div>
                 </div>
 
                 <div class="mt-auto flex items-center justify-between">
                     <div class="text-xs text-neutral-400">House spice blend</div>
                     <a href="/menu#specials"
-                        class="inline-flex items-center gap-2 text-sm font-semibold nav-focus text-[var(--primary)]">
+                        class="inline-flex items-center gap-2 text-sm font-semibold focus:outline-none text-primary">
                         See specials
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -623,7 +302,6 @@
         </div>
     </section>
 
-
     <!-- ABOUT -->
     <section id="about" class="max-w-7xl mx-auto px-6 py-20">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -631,14 +309,20 @@
                 <h4 class="text-sm text-primary font-semibold">WELCOME</h4>
                 <h2 class="text-2xl md:text-3xl font-rock">About Alreys Somali Restaurant</h2>
                 <p class="text-sm text-neutral-600">At Alreys, we bring you the true taste of Somali and Mediterranean
-                    cuisine, served with warmth and hospitality. Located in the heart of town, our restaurant offers a
-                    comfortable and stylish dining space with ample seating capacity, making it perfect for families,
-                    friends, and groups of all sizes.</p>
+                    cuisine,
+                    served with warmth and hospitality. Located in the heart of town, our restaurant offers a
+                    comfortable and
+                    stylish dining space with ample seating capacity, making it perfect for families, friends, and
+                    groups of all
+                    sizes.</p>
                 <p class="text-sm text-neutral-600">Whether you’re looking for a relaxed lunch, a memorable dinner, or a
-                    place to celebrate a special occasion, Alreys is here to make your experience unforgettable. We also
-                    provide convenient on-site parking, ensuring your visit is as stress-free as possible.</p>
+                    place
+                    to celebrate a special occasion, Alreys is here to make your experience unforgettable. We also
+                    provide
+                    convenient on-site parking, ensuring your visit is as stress-free as possible.</p>
                 <p class="text-sm text-neutral-600">Come and savour authentic dishes prepared with the finest
-                    ingredients, blending rich Somali flavours with the freshness of Mediterranean cooking.</p>
+                    ingredients,
+                    blending rich Somali flavours with the freshness of Mediterranean cooking.</p>
 
                 <div class="mt-4 flex flex-wrap gap-3">
                     <a href="#contact"
@@ -677,8 +361,9 @@
             <div>
                 <div class="relative rounded-lg overflow-hidden shadow-soft-md">
                     <img src="/assets/about.jpg" alt="About Alreys" class="w-full h-80 object-cover" />
-                    <div class="absolute bottom-4 left-4 bg-white/90 px-3 py-2 rounded-lg text-sm font-medium">Authentic
-                        Somali & Mediterranean</div>
+                    <div
+                        class="absolute bottom-4 left-4 bg-white/90 px-3 py-2 rounded-lg text-sm font-medium text-neutral-900">
+                        Authentic Somali & Mediterranean</div>
                 </div>
             </div>
         </div>
@@ -754,14 +439,15 @@
     </section>
 
     <!-- TESTIMONIALS (improved) -->
-    <section id="testimonials" class="testi-section py-16">
+    <section id="testimonials" class="py-16">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center md:text-left mb-8">
                 <div class="text-sm text-primary font-semibold tracking-widest">TESTIMONIALS</div>
-                <h2 class="mt-3 text-4xl md:text-5xl font-lemon text-[ #0a1720 ] leading-tight">What Our Customers Say!
+                <h2 class="mt-3 text-4xl md:text-5xl font-lemon text-[#0a1720] leading-tight">What Our Customers Say!
                 </h2>
                 <p class="mt-4 text-sm text-neutral-600 max-w-2xl">Real feedback from our guests — food, service and
-                    atmosphere that bring people back.</p>
+                    atmosphere
+                    that bring people back.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative" role="region"
@@ -769,9 +455,10 @@
                 <!-- Left: dynamic avatar + decorative bubble -->
                 <div class="flex flex-col items-center md:items-start justify-center space-y-6">
                     <img id="dynamicAvatar" src="/assets/avatar1.jpg" alt="Avatar for the current testimonial"
-                        class="testi-avatar" />
-                    <div class="hidden md:block dots w-24 h-6 opacity-20"></div>
-                    <div class="testi-quote-bubble" aria-hidden="true">
+                        class="w-[260px] h-[260px] rounded-full shadow-xl object-cover border-[10px] border-white/95" />
+                    <div class="hidden md:block w-24 h-6 opacity-20"></div>
+                    <div class="w-[110px] h-[110px] rounded-full grid place-items-center bg-[#d84b2f] text-white shadow translate-y-[30%] overflow-visible"
+                        aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="1.5"
@@ -782,7 +469,9 @@
 
                 <!-- Right: slides + controls -->
                 <div class="relative">
-                    <div class="testi-big-quote" aria-hidden="true">
+                    <div
+                        class="absolute right-6 top-20 pointer-events-none select-none font-serif text-[160px] leading-[0.8] opacity-[0.08]">
+                        <!-- decorative big quote (kept as SVG for shape) -->
                         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                             focusable="false">
                             <g fill="rgba(216,75,47,0.08)">
@@ -800,14 +489,15 @@
 
                     <!-- slider container (slides have data-avatar for dynamic avatar update) -->
                     <div id="testimonialSlider" class="max-w-xl relative" aria-live="polite">
-                        <div class="slide active" data-avatar="/assets/avatar1.jpg" data-author="Latifs Inspired">
+                        <div class="slide block opacity-100 transform translate-y-0 transition-opacity transition-transform duration-500"
+                            data-avatar="/assets/avatar1.jpg" data-author="Latifs Inspired">
                             <p class="text-neutral-700 text-base md:text-lg leading-relaxed">"The food was absolutely
-                                delicious — big generous cuts of meat, fragrant rice and the lamb shank was incredible.
-                                Felt
-                                like home cooking from the first bite. Highly recommended!"</p>
+                                delicious —
+                                big generous cuts of meat, fragrant rice and the lamb shank was incredible. Felt like
+                                home cooking from
+                                the first bite. Highly recommended!"</p>
                             <div class="mt-8 flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full grid place-items-center"
-                                    style="background:var(--testi-teal);">
+                                <div class="w-10 h-10 rounded-full grid place-items-center bg-[#8ec6c6]">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -821,13 +511,15 @@
                             </div>
                         </div>
 
-                        <div class="slide" data-avatar="/assets/avatar2.jpg" data-author="Sofia Ahmed">
+                        <div class="slide hidden opacity-0 transform translate-y-2 transition-opacity transition-transform duration-500"
+                            data-avatar="/assets/avatar2.jpg" data-author="Sofia Ahmed">
                             <p class="text-neutral-700 text-base md:text-lg leading-relaxed">"Amazing service — the
-                                staff were warm and welcoming, and the portions were generous. We absolutely loved the
-                                flavourful spices. We'll be coming back for the lamb shank!"</p>
+                                staff were warm
+                                and welcoming, and the portions were generous. We absolutely loved the flavourful
+                                spices. We'll be
+                                coming back for the lamb shank!"</p>
                             <div class="mt-8 flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full grid place-items-center"
-                                    style="background:var(--testi-teal);">
+                                <div class="w-10 h-10 rounded-full grid place-items-center bg-[#8ec6c6]">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -841,13 +533,15 @@
                             </div>
                         </div>
 
-                        <div class="slide" data-avatar="/assets/avatar3.jpg" data-author="Omar Hassan">
+                        <div class="slide hidden opacity-0 transform translate-y-2 transition-opacity transition-transform duration-500"
+                            data-avatar="/assets/avatar3.jpg" data-author="Omar Hassan">
                             <p class="text-neutral-700 text-base md:text-lg leading-relaxed">"Perfect spot for family
-                                dinners. The kids loved the milder dishes, and the adults enjoyed the bold, authentic
-                                flavours. Friendly staff and tidy restaurant."</p>
+                                dinners. The
+                                kids loved the milder dishes, and the adults enjoyed the bold, authentic flavours.
+                                Friendly staff and
+                                tidy restaurant."</p>
                             <div class="mt-8 flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full grid place-items-center"
-                                    style="background:var(--testi-teal);">
+                                <div class="w-10 h-10 rounded-full grid place-items-center bg-[#8ec6c6]">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -861,13 +555,15 @@
                             </div>
                         </div>
 
-                        <div class="slide" data-avatar="/assets/avatar4.jpg" data-author="Aisha Noor">
+                        <div class="slide hidden opacity-0 transform translate-y-2 transition-opacity transition-transform duration-500"
+                            data-avatar="/assets/avatar4.jpg" data-author="Aisha Noor">
                             <p class="text-neutral-700 text-base md:text-lg leading-relaxed">"Beautiful ambience and
-                                authentic food. The staff took great care of dietary requirements and even suggested
-                                dishes that matched our tastes. We'll recommend Al Reys to friends."</p>
+                                authentic food.
+                                The staff took great care of dietary requirements and even suggested dishes that matched
+                                our tastes.
+                                We'll recommend Al Reys to friends."</p>
                             <div class="mt-8 flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full grid place-items-center"
-                                    style="background:var(--testi-teal);">
+                                <div class="w-10 h-10 rounded-full grid place-items-center bg-[#8ec6c6]">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -883,16 +579,16 @@
 
                         <!-- slider controls -->
                         <div class="mt-6 flex items-center gap-3">
-                            <button id="prevTesti" class="px-3 py-2 rounded bg-white border shadow-sm nav-focus"
+                            <button id="prevTesti"
+                                class="px-3 py-2 rounded bg-white border shadow-sm focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
                                 aria-label="Previous testimonial">&larr;</button>
-                            <button id="nextTesti" class="px-3 py-2 rounded bg-white border shadow-sm nav-focus"
+                            <button id="nextTesti"
+                                class="px-3 py-2 rounded bg-white border shadow-sm focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
                                 aria-label="Next testimonial">&rarr;</button>
 
                             <!-- dots (will be populated by JS) -->
-                            <div class="ml-4 testi-dots" id="testiDots" aria-hidden="false" role="tablist"
-                                aria-label="Testimonial pages">
-                                <!-- JS will insert dots here -->
-                            </div>
+                            <div class="ml-4 inline-flex gap-2" id="testiDots" role="tablist"
+                                aria-label="Testimonial pages"></div>
 
                             <div class="ml-auto text-xs text-neutral-400">Read more on our socials</div>
                         </div>
@@ -901,7 +597,7 @@
             </div>
 
             <!-- hidden live region used for screen readers to announce slide changes -->
-            <div id="testiLive" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+            <div id="testiLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
         </div>
     </section>
 
@@ -912,121 +608,74 @@
                 <h3 class="text-sm text-primary font-semibold tracking-widest">OUR IMPACT</h3>
                 <h2 class="mt-2 text-2xl md:text-3xl font-rock">Numbers that tell our story</h2>
                 <p class="mt-2 text-sm text-neutral-500 max-w-2xl mx-auto">From signature dishes to happy customers — a
-                    quick snapshot.</p>
+                    quick
+                    snapshot.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 items-center">
                 <!-- Dishes -->
-                <div class="relative stat-card overflow-visible rounded-lg p-6 flex items-center justify-center">
-                    <div class="stat-number" data-target="67" aria-hidden="true">9</div>
-                    <div class="stat-pill px-6 py-2 bg-white rounded shadow-sm font-semibold">Dishes</div>
+                <div class="relative overflow-visible rounded-lg p-6 flex items-center justify-center">
+                    <div
+                        class="absolute text-[7.5rem] font-lemon font-bold leading-[0.85] text-primary/10 pointer-events-none select-none -translate-y-[8%]">
+                        9</div>
+                    <div class="relative z-10 px-6 py-2 bg-white rounded shadow-sm font-semibold">Dishes</div>
                 </div>
 
-                <!-- Spices (house blend) -->
-                <div class="relative stat-card overflow-visible rounded-lg p-6 flex items-center justify-center">
-                    <div class="stat-number" data-target="1" aria-hidden="true">3</div>
-                    <div class="stat-pill px-6 py-2 bg-white rounded shadow-sm font-semibold">Platters</div>
+                <!-- Platters -->
+                <div class="relative overflow-visible rounded-lg p-6 flex items-center justify-center">
+                    <div
+                        class="absolute text-[5.5rem] md:text-[7.5rem] font-lemon font-bold leading-[0.85] text-primary/10 pointer-events-none select-none -translate-y-[8%]">
+                        3</div>
+                    <div class="relative z-10 px-6 py-2 bg-white rounded shadow-sm font-semibold">Platters</div>
                 </div>
 
                 <!-- Desserts -->
-                <div class="relative stat-card overflow-visible rounded-lg p-6 flex items-center justify-center">
-                    <div class="stat-number" data-target="3" aria-hidden="true">3</div>
-                    <div class="stat-pill px-6 py-2 bg-white rounded shadow-sm font-semibold">Desserts</div>
+                <div class="relative overflow-visible rounded-lg p-6 flex items-center justify-center">
+                    <div
+                        class="absolute text-[5.5rem] md:text-[7.5rem] font-lemon font-bold leading-[0.85] text-primary/10 pointer-events-none select-none -translate-y-[8%]">
+                        3</div>
+                    <div class="relative z-10 px-6 py-2 bg-white rounded shadow-sm font-semibold">Desserts</div>
                 </div>
 
                 <!-- Drinks -->
-                <div class="relative stat-card overflow-visible rounded-lg p-6 flex items-center justify-center">
-                    <div class="stat-number" data-target="31" aria-hidden="true">17</div>
-                    <div class="stat-pill px-6 py-2 bg-white rounded shadow-sm font-semibold">Drinks</div>
+                <div class="relative overflow-visible rounded-lg p-6 flex items-center justify-center">
+                    <div
+                        class="absolute text-[7.5rem] font-lemon font-bold leading-[0.85] text-primary/10 pointer-events-none select-none -translate-y-[8%]">
+                        17</div>
+                    <div class="relative z-10 px-6 py-2 bg-white rounded shadow-sm font-semibold">Drinks</div>
                 </div>
             </div>
         </div>
     </section>
 
-
     <!-- FOOTER (now contains contact info and uses secondary color background) -->
-    <footer id="contact" class="py-10" style="background:var(--secondary); color: white;">
+    <footer id="contact" class="py-10 bg-[#151515]/70 text-white">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
                 <img src="/assets/logo.png" alt="logo" class="h-10 mb-4" />
-                <p class="text-xs text-neutral-300">Copyright © 2025 Al Reys. Design & Developed by You.</p>
+                <p class="text-xs text-white/80">Copyright © 2025 Al Reys. Design & Developed by You.</p>
             </div>
             <div>
                 <h4 class="font-medium text-white">Opening Hours</h4>
-                <p class="text-xs mt-2 text-neutral-300">Mon - Sun 12:00 pm - 11:00 pm</p>
+                <p class="text-xs mt-2 text-white/70">Mon - Sun 12:00 pm - 11:00 pm</p>
             </div>
             <div>
                 <h4 class="font-medium text-white">Contact</h4>
-                <p class="text-xs mt-2 text-neutral-300">329 Wellingborough Rd, Northampton NN1 4EW<br />Tel: <a
-                        href="tel:07843784145" class="underline text-white hover:text-[var(--primary)]">07843 784145</a>
-                    / <a href="tel:01604218037" class="underline text-white hover:text-[var(--primary)]">01604
-                        218037</a><br />E-mail: <a href="mailto:info@alreys.co.uk"
-                        class="underline text-white hover:text-[var(--primary)]">info@alreys.co.uk</a></p>
+                <p class="text-xs mt-2 text-white/70">329 Wellingborough Rd, Northampton NN1 4EW<br />Tel: <a
+                        href="tel:07843784145" class="underline hover:text-primary">07843 784145</a> / <a
+                        href="tel:01604218037" class="underline hover:text-primary">01604 218037</a><br />E-mail: <a
+                        href="mailto:info@alreys.co.uk" class="underline hover:text-primary">info@alreys.co.uk</a></p>
                 <div class="mt-3 flex items-center gap-3">
                     <a href="https://www.instagram.com/alreyssomalirestaurant/" target="_blank" rel="noreferrer"
-                        class="text-sm underline text-white hover:text-[var(--primary)]">Instagram</a>
+                        class="text-sm underline hover:text-primary">Instagram</a>
                     <a href="https://www.facebook.com/profile.php?id=61578677582714" target="_blank" rel="noreferrer"
-                        class="text-sm underline text-white hover:text-[var(--primary)]">Facebook</a>
+                        class="text-sm underline hover:text-primary">Facebook</a>
                     <a href="https://www.tiktok.com/foryou?lang=en" target="_blank" rel="noreferrer"
-                        class="text-sm underline text-white hover:text-[var(--primary)]">TikTok</a>
+                        class="text-sm underline hover:text-primary">TikTok</a>
                 </div>
             </div>
         </div>
     </footer>
-
-    <!-- Reservation Modal (simple accessible) -->
-    <div id="modalBackdrop" class="fixed inset-0 hidden items-center justify-center modal-backdrop z-50">
-        <div role="dialog" aria-modal="true" aria-labelledby="reserveTitle"
-            class="bg-white rounded-lg max-w-md w-full mx-4 p-6 shadow-soft-lg relative">
-            <!-- MOBILE CLOSE ICON (visible on small screens) -->
-            <button id="closeModalMobile" class="modal-close-mobile" aria-label="Close reservation (mobile)">
-                <!-- simple X icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-
-            <div class="flex items-start justify-between gap-4">
-                <div>
-                    <h3 id="reserveTitle" class="text-lg font-medium">Reserve a Table</h3>
-                    <p class="text-xs text-neutral-500">Fill the details and we'll contact you to confirm.</p>
-                </div>
-                <button id="closeModal" aria-label="Close reservation" class="text-neutral-500 nav-focus">✕</button>
-            </div>
-
-            <form id="reserveForm" class="mt-4 grid grid-cols-1 gap-3">
-                <label class="text-xs">Full name
-                    <input required name="fullname" class="mt-1 w-full border px-3 py-2 rounded"
-                        placeholder="Your name" />
-                </label>
-                <label class="text-xs">Phone
-                    <input required name="phone" class="mt-1 w-full border px-3 py-2 rounded"
-                        placeholder="Phone number" />
-                </label>
-                <div class="grid grid-cols-2 gap-2">
-                    <label class="text-xs">Guests
-                        <select name="guests" class="mt-1 w-full border px-3 py-2 rounded">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5+</option>
-                        </select>
-                    </label>
-                    <label class="text-xs">Date & Time
-                        <input type="datetime-local" name="datetime" class="mt-1 w-full border px-3 py-2 rounded" />
-                    </label>
-                </div>
-
-                <div class="flex items-center justify-between gap-3 mt-2">
-                    <button type="submit" class="bg-primary text-secondary px-4 py-2 rounded font-medium">Request
-                        reservation</button>
-                    <button type="button" id="cancelModal" class="text-sm text-neutral-500">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <script src="/assets/main.js"></script>
 </body>
