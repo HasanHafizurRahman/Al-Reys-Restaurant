@@ -38,17 +38,36 @@
             /* ensure absolute mobile menu positions itself relative to header */
         }
 
-        /* Reduce large gaps on small screens */
-        @media (max-width: 1024px) {
+        /* Reduce large gaps on small screens and prevent grid rows from stretching */
+        .main-grid {
+            grid-auto-rows: auto; /* important: let rows size to their content */
+            gap: 1rem; /* default mobile gap */
+        }
+
+        @media (min-width: 1024px) {
             .main-grid {
-                gap: 1rem;
+                gap: 2rem; /* restore larger gap on desktop */
             }
 
-            .contact-aside .card {
-                margin-bottom: 0;
+            .contact-aside {
+                gap: 1.5rem;
             }
+        }
 
-            /* If your header uses sticky with top offset, ensure mobile menu sits right below header */
+        /* Use flex-gap for the aside instead of space-y to avoid double/mismatched spacing on small screens */
+        .contact-aside {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem; /* smaller stack gap on mobile */
+        }
+
+        /* Remove any unexpected bottom margins from nested cards */
+        .contact-aside .card {
+            margin-bottom: 0;
+        }
+
+        /* If your header uses sticky with top offset, ensure mobile menu sits right below header */
+        @media (max-width: 1024px) {
             #mobileNav {
                 top: calc(100% + 0.5rem);
                 margin-top: 0 !important;
@@ -59,6 +78,16 @@
         iframe#gmap,
         iframe#gmaps {
             display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Defensive: remove any large margins that could be coming from nested elements */
+        .contact-aside * {
+            /* Only reset margins that cause big layout shifts; keep small margins for readability */
+            margin-block-start: 0;
+            margin-block-end: 0;
         }
     </style>
 </head>
@@ -116,7 +145,6 @@
 
                 <!-- mobile menu: positioned right under header on small screens -->
                 <div id="mobileNav" class="md:hidden hidden absolute left-4 right-4 top-full mt-2 px-6">
-                    <!-- replaced mt-80 with top-full mt-2 -->
                     <div class="bg-white rounded-xl border shadow p-4 flex flex-col gap-2">
                         <a href="/" class="py-2">Home</a>
                         <a href="/about.html" class="py-2">About</a>
@@ -140,9 +168,9 @@
 
     <!-- CONTACT CONTENT (NO FORM) -->
     <main class="max-w-7xl mx-auto px-6 py-16">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start main-grid"> <!-- added main-grid class -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 main-grid items-start"> <!-- responsive gap now controlled in CSS -->
             <!-- Contact info -->
-            <aside class="lg:col-span-1 space-y-6 contact-aside"> <!-- added contact-aside class -->
+            <aside class="lg:col-span-1 contact-aside"> <!-- switched to flex-gap for mobile -->
                 <div class="bg-white rounded-2xl p-6 shadow-soft-md border border-white/60 card">
                     <h4 class="font-medium">Contact</h4>
                     <p class="text-sm text-neutral-600 mt-3">329 Wellingborough Rd<br />Northampton NN1 4EW</p>
@@ -203,7 +231,7 @@
             </aside>
 
             <!-- Map + directions -->
-            <div class="lg:col-span-2 space-y-6">
+            <div class="lg:col-span-2 space-y-6 -mt-60 md:mt-0">
                 <section class="bg-white rounded-2xl overflow-hidden border border-white/60 shadow-soft-md">
                     <div class="p-4">
                         <div class="flex items-start justify-between">
@@ -222,7 +250,7 @@
 
                     <!-- Google Maps Embed (lazy load) -->
                     <div class="w-full h-72 md:h-96">
-                        <iframe id="gmaps" loading="lazy" class="w-full h-full border-0"
+                        <iframe id="gmaps" loading="lazy" class="w-full h-full"
                             referrerpolicy="no-referrer-when-downgrade"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2402.138196841655!2d-0.8944327841572308!3d52.23371797975406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4877a154a5e0c8f1%3A0x21d1d2f2c9b8b9a6!2s329%20Wellingborough%20Rd%2C%20Northampton%20NN1%204EW!5e0!3m2!1sen!2suk!4v1690000000000"
                             allowfullscreen aria-hidden="false" tabindex="0"></iframe>
