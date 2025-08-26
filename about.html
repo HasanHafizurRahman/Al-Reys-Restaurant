@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>About — Al Reys Somali Restaurant</title>
+
+    <script>
+        tailwind = {
+            config: {
+                theme: {
+                    extend: {
+                        colors: { primary: '#CEB02E', secondary: '#151515' },
+                        fontFamily: {
+                            lemon: ['"Lemon Milk"', 'sans-serif'],
+                            rockwell: ['"Rockwell"', 'serif'],
+                            poppins: ['Poppins', 'sans-serif']
+                        },
+                        boxShadow: {
+                            'soft-lg': '0 18px 40px rgba(20,20,30,0.08)',
+                            'soft-md': '0 10px 28px rgba(20,20,30,0.06)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
+        crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* small local tweaks just for the about page */
+        .hero-about {
+            background-image: url('/assets/about-hero.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-neutral-700 font-poppins antialiased">
+
+    <!-- START: Header (copied from home for consistent nav) -->
+    <div class="hidden md:block bg-[rgba(21,21,21,0.02)] border-b">
+        <div class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between text-xs text-neutral-500">
+            <div>Open daily • Parking available • Halal Certified</div>
+            <div class="flex items-center gap-4">
+                <a href="tel:07843784145" class="hover:text-primary">07843 784145</a>
+                <a href="mailto:info@alreys.co.uk" class="hover:text-primary">info@alreys.co.uk</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="w-full sticky top-6 z-50">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="bg-white rounded-2xl shadow-soft-lg border border-white/60 flex items-center justify-between gap-6 py-3 px-5 md:px-6"
+                role="navigation" aria-label="Main navigation">
+                <a href="/" class="flex items-center gap-3">
+                    <img src="/assets/logo.png" alt="Al Reys logo" class="h-10" />
+                </a>
+
+                <nav id="main-nav" class="hidden md:flex items-center gap-8 text-sm ml-auto">
+                    <a href="/"
+                        class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">Home</a>
+                    <a href="/about"
+                        class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">About</a>
+                    <a href="/menu"
+                        class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">Menu</a>
+                    <a href="/gallery"
+                        class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">Gallery</a>
+                    <a href="/contact"
+                        class="relative nav-item nav-pill focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded-full px-3 py-2 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">Contact</a>
+                </nav>
+
+                <div class="flex items-center gap-3">
+                    <button id="navToggle" aria-expanded="false" aria-controls="mobileNav"
+                        class="md:hidden p-2 rounded-md border focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                        aria-label="Open menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="hamburger" class="h-5 w-5 transition-transform"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="mobileNav" class="md:hidden hidden absolute left-4 right-4 mt-80 px-6">
+                    <div class="bg-white rounded-xl border shadow p-4 flex flex-col gap-2">
+                        <a href="/" class="py-2">Home</a>
+                        <a href="/about" class="py-2">About</a>
+                        <a href="/menu" class="py-2">Menu</a>
+                        <a href="/gallery" class="py-2">Gallery</a>
+                        <a href="/contact" class="py-2">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- END: Header -->
+
+    <!-- HERO: About -->
+    <section class="relative min-h-[48vh] md:min-h-[60vh] flex items-end overflow-hidden">
+        <!-- Decorative image (fills the hero) -->
+        <img src="/assets/hero.jpg" alt="" aria-hidden="true"
+            class="absolute inset-0 w-full h-full object-cover object-center -z-10" />
+
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/30"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-20">
+            <div class="text-white max-w-3xl">
+                <h1 class="text-4xl md:text-5xl font-lemon">About Al Reys</h1>
+                <p class="mt-4 text-neutral-200 text-lg">
+                    Bringing authentic Somali & Mediterranean flavours to the heart of town — served with warmth, family
+                    recipes and fresh ingredients.
+                </p>
+                <div class="mt-6">
+                    <a href="/menu"
+                        class="inline-flex items-center gap-2 bg-primary border border-white text-secondary px-5 py-3 rounded shadow font-medium">See
+                        Menu</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ABOUT CONTENT -->
+    <main class="max-w-7xl mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <div class="lg:col-span-2 space-y-6">
+                <h2 class="text-2xl md:text-3xl font-rock">Our Story</h2>
+                <p class="text-sm text-neutral-600">At Al Reys, we bring you the true taste of Somali and Mediterranean
+                    cuisine, served with warmth and hospitality. Located in the heart of town, our restaurant offers a
+                    comfortable and stylish dining space with ample seating capacity — perfect for families, friends and
+                    groups of all sizes.</p>
+
+                <p class="text-sm text-neutral-600">Whether you’re after a relaxed lunch, a memorable dinner, or a place
+                    to celebrate a special occasion, Al Reys aims to make your experience unforgettable. We use the
+                    finest ingredients and traditional spice blends to blend rich Somali flavours with Mediterranean
+                    freshness.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div class="rounded-lg overflow-hidden shadow-soft-md">
+                        <img src="/assets/about.jpg" alt="Dining at Al Reys" class="w-full h-48 object-cover" />
+                    </div>
+                    <div class="rounded-lg overflow-hidden shadow-soft-md">
+                        <img src="/assets/hero-dish.jpg" alt="Signature dish" class="w-full h-48 object-cover" />
+                    </div>
+                </div>
+
+                <section class="mt-8">
+                    <h3 class="text-xl font-medium">What we serve</h3>
+                    <p class="mt-2 text-sm text-neutral-600">Our menu is a celebration of flavour, culture and
+                        tradition. Everything is freshly prepared so you can enjoy an authentic taste of Somali heritage
+                        alongside Mediterranean favourites.</p>
+
+                    <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-neutral-600">
+                        <li class="flex items-start gap-3"><span class="text-primary mt-1"><i
+                                    class="fa-solid fa-circle-check"></i></span>
+                            <div><strong>Starters</strong> — Light bites and appetisers to awaken your appetite.</div>
+                        </li>
+                        <li class="flex items-start gap-3"><span class="text-primary mt-1"><i
+                                    class="fa-solid fa-circle-check"></i></span>
+                            <div><strong>Main courses</strong> — Hearty Somali dishes, grills, seafood, vegetarian
+                                options and Mediterranean classics.</div>
+                        </li>
+                        <li class="flex items-start gap-3"><span class="text-primary mt-1"><i
+                                    class="fa-solid fa-circle-check"></i></span>
+                            <div><strong>Sides & salads</strong> — Freshly made to complement your meal.</div>
+                        </li>
+                        <li class="flex items-start gap-3"><span class="text-primary mt-1"><i
+                                    class="fa-solid fa-circle-check"></i></span>
+                            <div><strong>Desserts & drinks</strong> — Sweet endings and refreshing beverages.</div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="mt-8 bg-white rounded-2xl p-6 shadow-soft-lg border border-white/60">
+                    <h3 class="text-lg font-medium">Private hire & events</h3>
+                    <p class="mt-2 text-sm text-neutral-600">Looking for a place to celebrate? Al Reys is great for
+                        birthdays, family gatherings, business dinners and private events. With generous seating and
+                        on-site parking, we can host your guests comfortably and help you plan the menu.</p>
+                    <p class="mt-3 text-sm"><strong>Book in advance</strong> to secure your date — contact our events
+                        team and we’ll take care of the rest.</p>
+                    <div class="mt-4">
+                        <a href="/contact"
+                            class="inline-flex items-center gap-2 border border-neutral-200 px-4 py-2 rounded hover:bg-neutral-50">Enquire
+                            about events <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Sidebar: contact + quick facts -->
+            <aside class="space-y-6">
+                <div class="bg-white rounded-2xl p-5 shadow-soft-md border border-white/60">
+                    <h4 class="font-medium">Contact</h4>
+                    <p class="text-xs text-neutral-600 mt-2">329 Wellingborough Rd<br />Northampton NN1 4EW</p>
+                    <p class="text-xs text-neutral-600 mt-2">Tel: <a href="tel:07843784145"
+                            class="underline hover:text-primary">07843 784145</a><br />Tel: <a href="tel:01604218037"
+                            class="underline hover:text-primary">01604 218037</a></p>
+                    <p class="text-xs text-neutral-600 mt-2">E-mail: <a href="mailto:info@alreys.co.uk"
+                            class="underline hover:text-primary">info@alreys.co.uk</a></p>
+
+                    <div class="mt-4 flex items-center gap-3">
+                        <a href="https://www.instagram.com/alreyssomalirestaurant/" target="_blank" rel="noreferrer"
+                            class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/6 hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                            aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61578677582714" target="_blank"
+                            rel="noreferrer"
+                            class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/6 hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                            aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/foryou?lang=en" target="_blank" rel="noreferrer"
+                            class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/6 hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                            aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-5 shadow-soft-md border border-white/60 text-sm">
+                    <h4 class="font-medium">Quick facts</h4>
+                    <ul class="mt-3 space-y-2 text-neutral-600">
+                        <li>Open daily • 12:00 – 23:00</li>
+                        <li>Halal certified</li>
+                        <li>On-site parking</li>
+                        <li>Family friendly</li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-primary to-[#f59e42] rounded-2xl p-4 text-white text-center shadow-soft-md">
+                    <h5 class="font-medium">Book a Table</h5>
+                    <p class="text-sm mt-2">Reserve a table for lunch, dinner or special occasions.</p>
+                    <a href="tel:07843784145"
+                        class="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-white text-secondary rounded-full font-semibold">Call
+                        us</a>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer: copied from home -->
+    <footer id="contact" class="py-10 bg-[#151515] text-white">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+                <img src="/assets/logo.png" alt="logo" class="h-10 mb-4" />
+                <p class="text-xs text-white/80">Copyright © 2025 Al Reys. Design & Developed by You.</p>
+            </div>
+
+            <div>
+                <h4 class="font-medium text-white">Opening Hours</h4>
+                <p class="text-xs mt-2 text-white/70">Mon - Sun 12:00 pm - 11:00 pm</p>
+            </div>
+
+            <div>
+                <h4 class="font-medium text-white">Contact</h4>
+                <p class="text-xs mt-2 text-white/70">329 Wellingborough Rd, Northampton NN1 4EW<br />Tel: <a
+                        href="tel:07843784145" class="underline hover:text-primary">07843 784145</a> / <a
+                        href="tel:01604218037" class="underline hover:text-primary">01604 218037</a><br />E-mail: <a
+                        href="mailto:info@alreys.co.uk" class="underline hover:text-primary">info@alreys.co.uk</a></p>
+
+                <div class="mt-3 flex items-center gap-3">
+                    <a href="https://www.instagram.com/alreyssomalirestaurant/" target="_blank" rel="noreferrer"
+                        class="text-sm underline hover:text-primary">Instagram</a>
+                    <a href="https://www.facebook.com/profile.php?id=61578677582714" target="_blank" rel="noreferrer"
+                        class="text-sm underline hover:text-primary">Facebook</a>
+                    <a href="https://www.tiktok.com/foryou?lang=en" target="_blank" rel="noreferrer"
+                        class="text-sm underline hover:text-primary">TikTok</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/main.js"></script>
+</body>
+
+</html>
