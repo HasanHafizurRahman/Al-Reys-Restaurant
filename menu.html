@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Al Reys — Menu</title>
+
+  <script>
+    tailwind = {
+      config: {
+        theme: {
+          extend: {
+            colors: { primary: '#CEB02E', secondary: '#151515' },
+            fontFamily: {
+              lemon: ['"Lemon Milk"', 'sans-serif'],
+              rockwell: ['"Rockwell"', 'serif'],
+              poppins: ['Poppins', 'sans-serif']
+            },
+            boxShadow: {
+              'soft-lg': '0 18px 40px rgba(20,20,30,0.08)',
+              'soft-md': '0 10px 28px rgba(20,20,30,0.06)'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* small local tweak for hero background image (same as about) */
+    .hero-about {
+      background-image: url('/assets/hero.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="bg-white text-neutral-700 font-poppins antialiased">
+
+  <!-- TOP BAR (same as about) -->
+  <div class="hidden md:block bg-[rgba(21,21,21,0.02)] border-b">
+    <div class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between text-xs text-neutral-500">
+      <div>Open daily • Parking available • Halal Certified</div>
+      <div class="flex items-center gap-4">
+        <a href="tel:07843784145" class="hover:text-primary">07843 784145</a>
+        <a href="mailto:info@alreys.co.uk" class="hover:text-primary">info@alreys.co.uk</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER (from about.html) -->
+  <header class="w-full sticky top-6 z-50">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="bg-white rounded-2xl shadow-soft-lg border border-white/60 flex items-center justify-between gap-6 py-3 px-5 md:px-6"
+           role="navigation" aria-label="Main navigation">
+        <a href="/" class="flex items-center gap-3">
+          <img src="/assets/logo.png" alt="Al Reys logo" class="h-10" />
+        </a>
+
+        <nav id="main-nav" class="hidden md:flex items-center gap-8 text-sm ml-auto">
+          <a href="/" class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">Home</a>
+          <a href="/about.html" class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">About</a>
+          <a href="/menu.html" class="relative nav-item focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded px-2 py-1 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">Menu</a>
+          <a href="/contact.html" class="relative nav-item nav-pill focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)] rounded-full px-3 py-2 uppercase font-semibold tracking-wide text-neutral-800 inline-flex items-center gap-2">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <button id="navToggle" aria-expanded="false" aria-controls="mobileNav"
+                  class="md:hidden p-2 rounded-md border focus:outline-none focus:ring-4 focus:ring-[rgba(206,176,46,0.12)]"
+                  aria-label="Open menu">
+            <svg xmlns="http://www.w3.org/2000/svg" id="hamburger" class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+
+        <div id="mobileNav" class="md:hidden hidden absolute left-4 right-4 mt-80 px-6">
+          <div class="bg-white rounded-xl border shadow p-4 flex flex-col gap-2">
+            <a href="/" class="py-2">Home</a>
+            <a href="/about.html" class="py-2">About</a>
+            <a href="/menu.html" class="py-2">Menu</a>
+            <a href="/contact.html" class="py-2">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO (same style as about, but for Menu) -->
+  <section class="relative min-h-[48vh] md:min-h-[56vh] flex items-end overflow-hidden hero-about">
+    <!-- image is set via CSS but keep an <img> for accessibility/fallback if you prefer -->
+    <img src="/assets/hero.jpg" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover object-center -z-10" />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/30"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-20">
+      <div class="text-white max-w-3xl">
+        <h1 class="text-4xl md:text-5xl font-lemon">Our Menu</h1>
+        <p class="mt-4 text-neutral-200 text-lg">Full list of dishes, sides, drinks and chef specials. Prices shown in GBP.</p>
+        <div class="mt-6">
+          <a href="/assets/Al Reys Menu.pdf" download class="inline-flex items-center gap-2 bg-primary border border-white text-secondary px-5 py-3 rounded shadow font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v12m0 0l-4-4m4 4l4-4M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg>
+            Download Menu
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN: Keep your full menu sections here (from your original menu.html) -->
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Left column: categories list (sticky) -->
+      <aside class="lg:col-span-1 sticky top-24 self-start hidden md:block">
+        <div class="bg-white rounded-xl p-4 shadow-soft-md border">
+          <h4 class="text-sm text-primary font-semibold">Jump to</h4>
+          <nav class="mt-3 flex flex-col gap-2 text-sm">
+            <a href="#wraps" class="py-2 hover:text-primary">Wraps</a>
+            <a href="#breakfast" class="py-2 hover:text-primary">Breakfast</a>
+            <a href="#main-dishes" class="py-2 hover:text-primary">Main Dishes</a>
+            <a href="#sharing" class="py-2 hover:text-primary">Sharing Platters</a>
+            <a href="#sides" class="py-2 hover:text-primary">Sides</a>
+            <a href="#drinks" class="py-2 hover:text-primary">Drinks</a>
+            <a href="#desserts" class="py-2 hover:text-primary">Desserts</a>
+            <a href="#burgers" class="py-2 hover:text-primary">Burgers</a>
+          </nav>
+        </div>
+
+        <div class="mt-6 bg-white rounded-xl p-4 shadow-soft-md border text-sm hidden md:block"></div>
+          <div class="font-medium">Served with</div>
+          <div class="text-xs text-neutral-500 mt-2">Choice of Bariis (rice), Basto (spaghetti), Soor, Jabaati, Rooti, Anjeero or Malawax + Al Reys Salad.</div>
+          <div class="text-xs text-neutral-400 mt-2">Half rice &amp; half pasta extra £3.50</div>
+        </div>
+      </aside>
+
+      <!-- Middle: main menu content -->
+      <section class="lg:col-span-2 space-y-10">
+        <!-- Wraps -->
+        <div id="wraps" class="bg-white rounded-xl p-6 shadow border">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-medium">Wraps</h3>
+            <div class="text-sm text-neutral-400">All wraps £12.99</div>
+          </div>
+
+          <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <li class="p-3 border rounded flex items-start justify-between">
+              <div>
+                <div class="font-medium">Chicken Wap</div>
+                <div class="text-xs text-neutral-500">Marinated chicken served as listed in the menu.</div>
+              </div>
+              <div class="text-sm">£12.99</div>
+            </li>
+
+            <li class="p-3 border rounded flex items-start justify-between">
+              <div>
+                <div class="font-medium">Halloumi Wrap</div>
+              </div>
+              <div class="text-sm">£12.99</div>
+            </li>
+
+            <li class="p-3 border rounded flex items-start justify-between">
+              <div>
+                <div class="font-medium">Falafel Wrap</div>
+              </div>
+              <div class="text-sm">£12.99</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Breakfast -->
+        <div id="breakfast" class="bg-white rounded-xl p-6 shadow border">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-medium">Breakfast</h3>
+            <div class="text-sm text-neutral-400">Traditional Somali breakfast</div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-3 border rounded">
+              <div class="font-medium">Kilyo (Kidneys)</div>
+              <div class="text-sm text-neutral-600">Breakfast for 1</div>
+              <div class="text-sm mt-2">£7.99</div>
+            </div>
+
+            <div class="p-3 border rounded">
+              <div class="font-medium">Fool (Brown beans)</div>
+              <div class="text-sm text-neutral-600">Breakfast for 1</div>
+              <div class="text-sm mt-2">£6.99</div>
+            </div>
+
+            <div class="p-3 border rounded">
+              <div class="font-medium">Suqaar (Beef cubes)</div>
+              <div class="text-sm text-neutral-600">Breakfast for 1</div>
+              <div class="text-sm mt-2">£8.00</div>
+            </div>
+
+            <div class="p-3 border rounded">
+              <div class="font-medium">Breakfast Sharing — Platter for 3</div>
+              <div class="text-xs text-neutral-500">Kilyo, Fool, Suqaar, Muqumad with hummus</div>
+              <div class="text-sm mt-2">£25.00</div>
+            </div>
+
+            <div class="p-3 border rounded">
+              <div class="font-medium">Anjeero (3x)</div>
+              <div class="text-sm mt-2">£3.00</div>
+            </div>
+
+            <div class="p-3 border rounded">
+              <div class="font-medium">Malawax (3x)</div>
+              <div class="text-sm mt-2">£3.00</div>
+            </div>
+
+            <div class="p-3 border rounded">
+              <div class="font-medium">Jabaati</div>
+              <div class="text-sm mt-2">£1.50</div>
+            </div>
+
+            <div class="p-3 border rounded">
+              <div class="font-medium">Sabayad</div>
+              <div class="text-sm mt-2">£1.50</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Dishes -->
+        <div id="main-dishes" class="bg-white rounded-xl p-6 shadow border">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-medium">Main Dishes</h3>
+            <div class="text-sm text-neutral-400">Served with your choice (see sidebar)</div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div>
+                <div class="font-medium">Lamb Shoulder</div>
+                <div class="text-xs text-neutral-500">Marinated with our Xawaash spices</div>
+              </div>
+              <div>£13.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div>
+                <div class="font-medium">Hilib Suqar (Meat in broth)</div>
+              </div>
+              <div>£12.00</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Salmon</div>
+              <div>£14.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Hilib (Lamb Shank)</div>
+              <div>£15.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Chicken Steak (Digaag)</div>
+              <div>£12.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Beef Steak</div>
+              <div>£11.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Beef Suqaar (Beef Cubes)</div>
+              <div>£11.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Chicken Suqaar (Chicken Cubes)</div>
+              <div>£10.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Chicken Legs</div>
+              <div>£9.99</div>
+            </div>
+          </div>
+
+          <div class="mt-4 text-xs text-neutral-500">All dishes are marinated with a fragrant blend of our homemade Xawaash spices.</div>
+        </div>
+
+        <!-- Sharing Platters -->
+        <div id="sharing" class="bg-white rounded-xl p-6 shadow border">
+          <h3 class="text-xl font-medium">Sharing Platters</h3>
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="p-3 border rounded">
+              <div class="font-medium">1-2 People Platter</div>
+              <div class="text-xs text-neutral-500">Includes Lambshank or Lamb Shoulder, Quarter Chicken & Beef Sogaar</div>
+              <div class="mt-2">£25.00</div>
+            </div>
+
+            <div class="p-3 border rounded">
+              <div class="font-medium">2-3 People Platter</div>
+              <div class="text-xs text-neutral-500">Includes Lambshank or Lamb Shoulder, Quarter Chicken & Beef Sogaar</div>
+              <div class="mt-2">£40.00</div>
+            </div>
+
+            <div class="p-3 border rounded">
+              <div class="font-medium">Unity Feast Platter</div>
+              <div class="text-xs text-neutral-500">Includes Lambshank or Lamb Shoulder, x3 Quarter Chicken & x3 Beef Sogaar</div>
+              <div class="mt-2">£80.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sides -->
+        <div id="sides" class="bg-white rounded-xl p-6 shadow border">
+          <h3 class="text-xl font-medium">Sides & Snacks</h3>
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Sambusa (Beef / Veg)</div>
+              <div>£1.50</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Regular Fries</div>
+              <div>£3.00</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Sweet Potato Fries</div>
+              <div>£3.00</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Maraq (Somali Soup)</div>
+              <div>£3.00</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Bajiyo & Bisbaas</div>
+              <div>£4.00</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Al Reys Famous Salad</div>
+              <div>£4.00</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Hummus with Oodkac</div>
+              <div>£6.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Burgers -->
+        <div id="burgers" class="bg-white rounded-xl p-6 shadow border">
+          <h3 class="text-xl font-medium">Burgers</h3>
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div>
+                <div class="font-medium">Chicken Burger</div>
+                <div class="text-xs text-neutral-500">Served with chips</div>
+              </div>
+              <div>£12.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Classic Smash Burger</div>
+              <div>£12.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Hawaii Burger</div>
+              <div>£12.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Big Fat Burger</div>
+              <div>£14.99</div>
+            </div>
+          </div>
+
+          <div class="mt-4 text-xs text-neutral-500">All burgers served with lettuce, gherkin, tomatoes, sauces & chips.</div>
+        </div>
+
+        <!-- Drinks -->
+        <div id="drinks" class="bg-white rounded-xl p-6 shadow border">
+          <h3 class="text-xl font-medium">Drinks</h3>
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Strawberry Mojito</div>
+              <div>£5.50</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Blue Ocean Special</div>
+              <div>£6.50</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Passion Fruit Special</div>
+              <div>£5.50</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Bubblegum Special</div>
+              <div>£5.50</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Mango Mojito</div>
+              <div>£5.50</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Lychee Mojito</div>
+              <div>£6.00</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Mix Fruit / Mushaakal (Smoothie)</div>
+              <div>£2.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Mango Lassi (Jug)</div>
+              <div>£6.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Bottle of Water</div>
+              <div>£1.20</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Soft Drink (Coke, 7up, Shani, Mirinda)</div>
+              <div>£2.00</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Fresh Orange Juice</div>
+              <div>£2.99</div>
+            </div>
+
+            <div class="p-3 border rounded flex items-start justify-between">
+              <div class="font-medium">Apple Juice</div>
+              <div>£2.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tea & Coffee + Desserts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div id="coffee" class="bg-white rounded-xl p-6 shadow border">
+            <h3 class="text-xl font-medium">Tea & Coffee</h3>
+            <div class="mt-4 grid grid-cols-1 gap-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="font-medium">Latte / Cappuccino / Americano / Mocha</div>
+                  <div class="text-xs text-neutral-500">Single cup</div>
+                </div>
+                <div>£2.70</div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="font-medium">Espresso Shot</div>
+                <div>£2.00</div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="font-medium">Hot Chocolate</div>
+                <div>£2.20</div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="font-medium">Somali/Shaah (Black/White, Cardamom, Cinnamon, Cloves)</div>
+                <div>£1.95</div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="font-medium">Mint Tea</div>
+                <div>£2.00</div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="font-medium">Green / English Tea</div>
+                <div>£1.50</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="desserts" class="bg-white rounded-xl p-6 shadow border">
+            <h3 class="text-xl font-medium">Desserts</h3>
+            <div class="mt-4 grid grid-cols-1 gap-3">
+              <div class="flex items-center justify-between">
+                <div class="font-medium">Malawah with Hazelnut</div>
+                <div>£3.00</div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="font-medium">Tiramisu</div>
+                <div>£2.99</div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="font-medium">Timir Cake (Date cake with caramel & ice cream)</div>
+                <div>£3.50</div>
+              </div>
+
+              <div class="text-xs text-neutral-500 mt-3">All desserts made fresh in-house daily.</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <div class="mt-10 text-center text-xs text-neutral-500">WWW.ALREYS.CO.UK — Somali Restaurant • Experience authentic Somali & Mediterranean flavours.</div>
+  </main>
+
+  <!-- FOOTER (from about.html) -->
+  <footer id="contact" class="py-10 bg-[#151515] text-white">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <img src="/assets/logo.png" alt="logo" class="h-10 mb-4" />
+        <p class="text-xs text-white/80">Copyright © 2025 Al Reys. Design & Developed by You.</p>
+      </div>
+
+      <div>
+        <h4 class="font-medium text-white">Opening Hours</h4>
+        <p class="text-xs mt-2 text-white/70">Mon - Sun 12:00 pm - 11:00 pm</p>
+      </div>
+
+      <div>
+        <h4 class="font-medium text-white">Contact</h4>
+        <p class="text-xs mt-2 text-white/70">329 Wellingborough Rd, Northampton NN1 4EW<br />Tel: <a href="tel:07843784145" class="underline hover:text-primary">07843 784145</a> / <a href="tel:01604218037" class="underline hover:text-primary">01604 218037</a><br />E-mail: <a href="mailto:info@alreys.co.uk" class="underline hover:text-primary">info@alreys.co.uk</a></p>
+
+        <div class="mt-3 flex items-center gap-3">
+          <a href="https://www.instagram.com/alreyssomalirestaurant/" target="_blank" rel="noreferrer" class="text-sm underline hover:text-primary">Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61578677582714" target="_blank" rel="noreferrer" class="text-sm underline hover:text-primary">Facebook</a>
+          <a href="https://www.tiktok.com/foryou?lang=en" target="_blank" rel="noreferrer" class="text-sm underline hover:text-primary">TikTok</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // print/download buttons from your original menu page
+    document.addEventListener('DOMContentLoaded', () => {
+      const printBtn = document.getElementById('printPdf');
+      if (printBtn) {
+        printBtn.addEventListener('click', () => {
+          window.open('/assets/Al Reys Menu.pdf', '_blank');
+        });
+      }
+
+      // smooth scrolling for anchor jumps
+      document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }));
+
+      // mobile nav toggle (small fallback if main.js not present)
+      const navToggle = document.getElementById('navToggle');
+      const mobileNav = document.getElementById('mobileNav');
+      if (navToggle && mobileNav) {
+        navToggle.addEventListener('click', () => {
+          const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+          navToggle.setAttribute('aria-expanded', String(!expanded));
+          mobileNav.classList.toggle('hidden');
+        });
+      }
+    });
+  </script>
+
+  <!-- optional site-wide script (if you have it) -->
+  <script src="/assets/main.js"></script>
+</body>
+</html>
